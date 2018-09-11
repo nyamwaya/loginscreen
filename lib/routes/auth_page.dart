@@ -76,7 +76,7 @@ class _AuthPageState extends State<AuthPage> {
       child: ListView(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         children: <Widget>[
-          SizedBox(height: 64.0),
+          SizedBox(height: 15.0),
           Column(
             children: <Widget>[
               Image.asset('assets/images/logo.png'),
@@ -139,7 +139,7 @@ class _AuthPageState extends State<AuthPage> {
 
   List<Widget> buildRegister() {
     return [
-      SizedBox(height: 32.0),
+     // SizedBox(height: 10.0),
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
@@ -207,7 +207,7 @@ class _AuthPageState extends State<AuthPage> {
               Text(
                 "OR",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.black54,
                   fontWeight: FontWeight.bold,
                 ),
               ),
