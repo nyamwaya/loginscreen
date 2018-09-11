@@ -41,8 +41,8 @@ class _AuthPageState extends State<AuthPage> {
               await widget.auth.signInWithEmailAndPassword(_email, _password);
           print("Signed in: $userId");
         } else {
-          String userId =
-              await widget.auth.createUserWithEmailAndPassword(_email, _password);
+          String userId = await widget.auth
+              .createUserWithEmailAndPassword(_email, _password);
           print("Registered user: $userId");
         }
         widget.onSignedIn();
@@ -74,7 +74,7 @@ class _AuthPageState extends State<AuthPage> {
     return new Scaffold(
         body: SafeArea(
       child: ListView(
-       // key: formKey,
+        // key: formKey,
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         children: <Widget>[
           SizedBox(height: 15.0),
@@ -115,26 +115,44 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   List<Widget> buildForgotPassword() {
-    return [
-      SizedBox(height: 8.0),
+    if (_formType == FormType.login) {
+      return [
+        SizedBox(height: 8.0),
 
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          FlatButton(
-            child: Text("Forgot Password?",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black54,
-                  fontSize: 15.0,
-                  fontFamily: 'Quicksand',
-                )),
-            onPressed: () => {},
-          )
-        ],
-      )
-      //SizedBox(height: 8.0),
-    ];
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            FlatButton(
+              child: Text("Forgot Password?",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                    fontSize: 15.0,
+                    fontFamily: 'Quicksand',
+                  )),
+              onPressed: () => {},
+            )
+          ],
+        )
+        //SizedBox(height: 8.0),
+      ];
+    } else {
+      return [
+        const SizedBox(height: 12.0),
+        PrimaryColorOverride(
+          color: kShrineBrown900,
+          child: new TextFormField(
+            controller: _passwordController,
+            decoration: new InputDecoration(labelText: "confirm password"),
+            validator: (value) =>
+                value.isEmpty ? 'Password can\'t be empty' : null,
+            onSaved: (value) => _password = value,
+            obscureText: true,
+          ),
+        )
+        //SizedBox(height: 8.0),
+      ];
+    }
   }
 
   List<Widget> buildRegister() {
