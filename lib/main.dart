@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
         
         primarySwatch: Colors.blue,
       ),
-      //home: new RootPage(auth: new Auth())
-      home: new LaunchPage()
+      home: new RootPage(auth: new Auth())
+     //home: new LaunchPage()
     );
   }
 }
