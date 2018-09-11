@@ -146,7 +146,7 @@ class _LoginPage extends State<LoginPage> with TickerProviderStateMixin {
                 child: new FlatButton(
                   child: new Text(
                     "Forgot Password?",
-                    style: TextStyle(
+                      style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.redAccent,
                       fontSize: 15.0,
