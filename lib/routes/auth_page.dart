@@ -102,7 +102,8 @@ class _AuthPageState extends State<AuthPage> {
                     buildForgotPassword() +
                     buildLoginButton() +
                     buildSeparator() +
-                    buildGoogleButton(),
+                    buildGoogleButton() +
+                    buildRegister(),
               ),
             ),
           ),
@@ -138,8 +139,13 @@ class _AuthPageState extends State<AuthPage> {
 
     List<Widget> buildRegister() {
     return [
-      //SizedBox(height: 8.0),
-      PrimaryColorOverride(
+      SizedBox(height: 32.0),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+                PrimaryColorOverride(
           color: kShrineBrown900,
           child: FlatButton(
             child: RichText(
@@ -162,14 +168,20 @@ class _AuthPageState extends State<AuthPage> {
                     ))
               ]),
             ),
-            onPressed: () => {},
+            onPressed: () => {
+              //TODO: onCLick
+            },
           ))
+          
+        ],
+      )
+
     ];
   }
 
   List<Widget> buildGoogleButton() {
     return [
-      //SizedBox(height: 8.0),
+      SizedBox(height: 8.0),
       PrimaryColorOverride(
           child: GoogleSignInButton(
         onPressed: () => {},
@@ -183,7 +195,7 @@ class _AuthPageState extends State<AuthPage> {
         color: kShrineBrown900,
         child: new Container(
           width: MediaQuery.of(context).size.width,
-          margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 16.0, bottom: 0.0),
+          margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 24.0, bottom: 0.0),
           alignment: Alignment.center,
           child: Row(
             children: <Widget>[
@@ -242,7 +254,7 @@ class _AuthPageState extends State<AuthPage> {
   List<Widget> buildLoginButton() {
     if (_formType == FormType.login) {
       return [
-        SizedBox(height: 8.0),
+        SizedBox(height: 16.0),
         RaisedButton(
           child: Text(
             "Sign In",
