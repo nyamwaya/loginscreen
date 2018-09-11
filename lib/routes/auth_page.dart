@@ -115,6 +115,8 @@ class _AuthPageState extends State<AuthPage> {
 
   List<Widget> buildForgotPassword() {
     return [
+      SizedBox(height: 8.0),
+
       Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
@@ -131,6 +133,37 @@ class _AuthPageState extends State<AuthPage> {
         ],
       )
       //SizedBox(height: 8.0),
+    ];
+  }
+
+    List<Widget> buildRegister() {
+    return [
+      //SizedBox(height: 8.0),
+      PrimaryColorOverride(
+          color: kShrineBrown900,
+          child: FlatButton(
+            child: RichText(
+              text: TextSpan(children: [
+                TextSpan(
+                    text: ("Don't have an account?"),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black38,
+                      fontSize: 15.0,
+                      fontFamily: 'Quicksand',
+                    )),
+                TextSpan(
+                    text: " Signup.",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                      fontSize: 15.0,
+                      fontFamily: 'Quicksand',
+                    ))
+              ]),
+            ),
+            onPressed: () => {},
+          ))
     ];
   }
 
