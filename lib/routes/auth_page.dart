@@ -4,7 +4,6 @@ import 'auth.dart';
 import 'package:firebase_auth_world/colors.dart';
 import 'package:firebase_auth_world/widgets/button_google.dart';
 
-
 class AuthPage extends StatefulWidget {
   AuthPage({this.auth, this.onSignedIn});
   final BaseAuth auth;
@@ -100,8 +99,10 @@ class _AuthPageState extends State<AuthPage> {
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: buildUserInput() +
-                    buildUSerButton() +
-                    buildForgotPassword() + buildSeparator() + buildGoogleButton(),
+                    buildForgotPassword() +
+                    buildLoginButton() +
+                    buildSeparator() +
+                    buildGoogleButton(),
               ),
             ),
           ),
@@ -114,44 +115,32 @@ class _AuthPageState extends State<AuthPage> {
 
   List<Widget> buildForgotPassword() {
     return [
-      //SizedBox(height: 8.0),
-      PrimaryColorOverride(
-          color: kShrineBrown900,
-          child: FlatButton(
-            child: RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                    text: ("Forgot your login details?"),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black38,
-                      fontSize: 15.0,
-                      fontFamily: 'Quicksand',
-                    )),
-                TextSpan(
-                    text: " Get help singin in",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                      fontSize: 15.0,
-                      fontFamily: 'Quicksand',
-                    ))
-              ]),
-            ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          FlatButton(
+            child: Text("Forgot Password?",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                  fontSize: 15.0,
+                  fontFamily: 'Quicksand',
+                )),
             onPressed: () => {},
-          ))
+          )
+        ],
+      )
+      //SizedBox(height: 8.0),
     ];
   }
 
-  List<Widget> buildGoogleButton(){
-    return[
-      SizedBox(height: 8.0),
+  List<Widget> buildGoogleButton() {
+    return [
+      //SizedBox(height: 8.0),
       PrimaryColorOverride(
-        child: GoogleSignInButton(
-          onPressed: () => {},
-          )
-        )
-
+          child: GoogleSignInButton(
+        onPressed: () => {},
+      ))
     ];
   }
 
@@ -161,7 +150,7 @@ class _AuthPageState extends State<AuthPage> {
         color: kShrineBrown900,
         child: new Container(
           width: MediaQuery.of(context).size.width,
-          margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 8.0),
+          margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 16.0, bottom: 0.0),
           alignment: Alignment.center,
           child: Row(
             children: <Widget>[
@@ -217,32 +206,26 @@ class _AuthPageState extends State<AuthPage> {
     ];
   }
 
-  List<Widget> buildUSerButton() {
+  List<Widget> buildLoginButton() {
     if (_formType == FormType.login) {
       return [
-        ButtonBar(
-          children: <Widget>[
-
-            RaisedButton(
-              child: Text(
-                "Sign In",
-                style: TextStyle(fontFamily: 'Quicksand'),
-              ),
-              elevation: 8.0,
-              
-              shape: BeveledRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(7.0))),
-              onPressed: validateAndSubmit,
-            )
-          ],
-        ),
+        SizedBox(height: 8.0),
+        RaisedButton(
+          child: Text(
+            "Sign In",
+            style: TextStyle(fontFamily: 'Quicksand'),
+          ),
+          elevation: 8.0,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(7.0))),
+          onPressed: validateAndSubmit,
+        )
       ];
     } else {
-      //TODO: show registration screen
+      //TODO: show registration flow
     }
   }
 }
-
 
 class PrimaryColorOverride extends StatelessWidget {
   const PrimaryColorOverride({Key key, this.color, this.child})
