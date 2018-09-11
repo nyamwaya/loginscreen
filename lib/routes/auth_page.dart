@@ -137,7 +137,7 @@ class _AuthPageState extends State<AuthPage> {
     ];
   }
 
-    List<Widget> buildRegister() {
+  List<Widget> buildRegister() {
     return [
       SizedBox(height: 32.0),
       Column(
@@ -145,37 +145,35 @@ class _AuthPageState extends State<AuthPage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-                PrimaryColorOverride(
-          color: kShrineBrown900,
-          child: FlatButton(
-            child: RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                    text: ("Don't have an account?"),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black38,
-                      fontSize: 15.0,
-                      fontFamily: 'Quicksand',
-                    )),
-                TextSpan(
-                    text: " Signup.",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                      fontSize: 15.0,
-                      fontFamily: 'Quicksand',
-                    ))
-              ]),
-            ),
-            onPressed: () => {
-              //TODO: onCLick
-            },
-          ))
-          
+          PrimaryColorOverride(
+              color: kShrineBrown900,
+              child: FlatButton(
+                child: RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text: ("Don't have an account?"),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black38,
+                          fontSize: 15.0,
+                          fontFamily: 'Quicksand',
+                        )),
+                    TextSpan(
+                        text: " Signup.",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                          fontSize: 15.0,
+                          fontFamily: 'Quicksand',
+                        ))
+                  ]),
+                ),
+                onPressed: () => {
+                      //TODO: onCLick
+                    },
+              ))
         ],
       )
-
     ];
   }
 
@@ -195,7 +193,8 @@ class _AuthPageState extends State<AuthPage> {
         color: kShrineBrown900,
         child: new Container(
           width: MediaQuery.of(context).size.width,
-          margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 24.0, bottom: 0.0),
+          margin: const EdgeInsets.only(
+              left: 30.0, right: 30.0, top: 24.0, bottom: 0.0),
           alignment: Alignment.center,
           child: Row(
             children: <Widget>[
@@ -255,10 +254,15 @@ class _AuthPageState extends State<AuthPage> {
     if (_formType == FormType.login) {
       return [
         SizedBox(height: 16.0),
+        
         RaisedButton(
+          color: Colors.redAccent,
           child: Text(
-            "Sign In",
-            style: TextStyle(fontFamily: 'Quicksand'),
+            "Sign in",
+            style: TextStyle(
+              fontFamily: 'Roboto', 
+              color: Colors.white,
+              fontWeight: FontWeight.bold ),
           ),
           elevation: 8.0,
           shape: BeveledRectangleBorder(
