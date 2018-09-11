@@ -42,7 +42,7 @@ class _AuthPageState extends State<AuthPage> {
           print("Signed in: $userId");
         } else {
           String userId =
-              await widget.auth.signInWithEmailAndPassword(_email, _password);
+              await widget.auth.createUserWithEmailAndPassword(_email, _password);
           print("Registered user: $userId");
         }
         widget.onSignedIn();
@@ -74,6 +74,7 @@ class _AuthPageState extends State<AuthPage> {
     return new Scaffold(
         body: SafeArea(
       child: ListView(
+       // key: formKey,
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         children: <Widget>[
           SizedBox(height: 15.0),
@@ -97,7 +98,6 @@ class _AuthPageState extends State<AuthPage> {
             child: new Form(
               key: formKey,
               child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: buildUserInput() +
                     buildForgotPassword() +
                     buildLoginButton() +
@@ -138,43 +138,79 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   List<Widget> buildRegister() {
-    return [
-     // SizedBox(height: 10.0),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          PrimaryColorOverride(
-              color: kShrineBrown900,
-              child: FlatButton(
-                child: RichText(
-                  text: TextSpan(children: [
-                    TextSpan(
-                        text: ("Don't have an account?"),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black38,
-                          fontSize: 15.0,
-                          fontFamily: 'Quicksand',
-                        )),
-                    TextSpan(
-                        text: " Signup.",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                          fontSize: 15.0,
-                          fontFamily: 'Quicksand',
-                        ))
-                  ]),
-                ),
-                onPressed: () => {
-                      //TODO: onCLick
-                    },
-              ))
-        ],
-      )
-    ];
+    if (_formType == FormType.login) {
+      return [
+        // SizedBox(height: 10.0),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            PrimaryColorOverride(
+                color: kShrineBrown900,
+                child: FlatButton(
+                  child: RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                          text: ("Don't have an account?"),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black38,
+                            fontSize: 15.0,
+                            fontFamily: 'Quicksand',
+                          )),
+                      TextSpan(
+                          text: " Sign up.",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                            fontSize: 15.0,
+                            fontFamily: 'Quicksand',
+                          ))
+                    ]),
+                  ),
+                  onPressed: moveToRegister,
+                ))
+          ],
+        )
+      ];
+    } else {
+      return [
+        // SizedBox(height: 10.0),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            PrimaryColorOverride(
+                color: kShrineBrown900,
+                child: FlatButton(
+                  child: RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                          text: ("Have an account?"),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black38,
+                            fontSize: 15.0,
+                            fontFamily: 'Quicksand',
+                          )),
+                      TextSpan(
+                          text: " Sign in.",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                            fontSize: 15.0,
+                            fontFamily: 'Quicksand',
+                          ))
+                    ]),
+                  ),
+                  onPressed: moveToLogin,
+                ))
+          ],
+        )
+      ];
+    }
   }
 
   List<Widget> buildGoogleButton() {
@@ -254,15 +290,14 @@ class _AuthPageState extends State<AuthPage> {
     if (_formType == FormType.login) {
       return [
         SizedBox(height: 16.0),
-        
         RaisedButton(
           color: Colors.redAccent,
           child: Text(
             "Sign in",
             style: TextStyle(
-              fontFamily: 'Roboto', 
-              color: Colors.white,
-              fontWeight: FontWeight.bold ),
+                fontFamily: 'Roboto',
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
           ),
           elevation: 8.0,
           shape: BeveledRectangleBorder(
@@ -272,6 +307,23 @@ class _AuthPageState extends State<AuthPage> {
       ];
     } else {
       //TODO: show registration flow
+      return [
+        SizedBox(height: 16.0),
+        RaisedButton(
+          color: Colors.redAccent,
+          child: Text(
+            "Register",
+            style: TextStyle(
+                fontFamily: 'Roboto',
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
+          elevation: 8.0,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(7.0))),
+          onPressed: validateAndSubmit,
+        )
+      ];
     }
   }
 }
