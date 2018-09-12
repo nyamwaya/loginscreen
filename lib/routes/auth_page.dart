@@ -20,6 +20,17 @@ class _AuthPageState extends State<AuthPage> {
 
   String _email;
   String _password;
+  String _confirmPassword;
+  String _fName;
+  String _lName;
+
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  
+
   FormType _formType = FormType.login;
 
   bool validateAndSave() {
@@ -66,8 +77,7 @@ class _AuthPageState extends State<AuthPage> {
     });
   }
 
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +89,7 @@ class _AuthPageState extends State<AuthPage> {
         children: <Widget>[
           SizedBox(height: 15.0),
           Column(
+            
             children: <Widget>[
               Image.asset('assets/images/logo.png'),
               SizedBox(height: 16.0),
@@ -99,10 +110,10 @@ class _AuthPageState extends State<AuthPage> {
               key: formKey,
               child: new Column(
                 children: buildUserInput() +
-                    buildForgotPassword() +
+                    //buildForgotPassword() +
                     buildLoginButton() +
-                    buildSeparator() +
-                    buildGoogleButton() +
+                    // buildSeparator() +
+                    // buildGoogleButton() +
                     buildRegister(),
               ),
             ),
@@ -115,7 +126,7 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   List<Widget> buildForgotPassword() {
-    if (_formType == FormType.login) {
+    
       return [
         SizedBox(height: 8.0),
 
@@ -136,23 +147,7 @@ class _AuthPageState extends State<AuthPage> {
         )
         //SizedBox(height: 8.0),
       ];
-    } else {
-      return [
-        const SizedBox(height: 12.0),
-        PrimaryColorOverride(
-          color: kShrineBrown900,
-          child: new TextFormField(
-            controller: _passwordController,
-            decoration: new InputDecoration(labelText: "confirm password"),
-            validator: (value) =>
-                value.isEmpty ? 'Password can\'t be empty' : null,
-            onSaved: (value) => _password = value,
-            obscureText: true,
-          ),
-        )
-        //SizedBox(height: 8.0),
-      ];
-    }
+    
   }
 
   List<Widget> buildRegister() {
@@ -279,55 +274,120 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   List<Widget> buildUserInput() {
-    return [
-      PrimaryColorOverride(
+    if (_formType == FormType.login) {
+      return [
+        PrimaryColorOverride(
+            color: kShrineBrown900,
+            child: new TextFormField(
+              controller: _emailController,
+              decoration: new InputDecoration(labelText: "email"),
+              validator: (value) =>
+                  value.isEmpty ? 'Email can\'t be empty' : null,
+              onSaved: (value) => _email = value,
+            )),
+        const SizedBox(height: 12.0),
+        PrimaryColorOverride(
           color: kShrineBrown900,
           child: new TextFormField(
-            controller: _usernameController,
-            decoration: new InputDecoration(labelText: "email"),
+            controller: _passwordController,
+            decoration: new InputDecoration(labelText: "password"),
             validator: (value) =>
-                value.isEmpty ? 'Email can\'t be empty' : null,
-            onSaved: (value) => _email = value,
-          )),
-      const SizedBox(height: 12.0),
-      PrimaryColorOverride(
-        color: kShrineBrown900,
-        child: new TextFormField(
-          controller: _passwordController,
-          decoration: new InputDecoration(labelText: "password"),
-          validator: (value) =>
-              value.isEmpty ? 'Password can\'t be empty' : null,
-          onSaved: (value) => _password = value,
-          obscureText: true,
+                value.isEmpty ? 'Password can\'t be empty' : null,
+            onSaved: (value) => _password = value,
+            obscureText: true,
+          ),
         ),
-      )
-    ];
+        new Column(
+          children: buildForgotPassword(),
+        )
+      ];
+    } else {
+      return [
+        PrimaryColorOverride(
+          color: kShrineBrown900,
+          child: TextFormField(
+            controller: _firstNameController,
+            decoration: InputDecoration(labelText: "first name"),
+            validator: (value) => value.isEmpty ? 'Last name can\'t be empty' : null,
+            onSaved: (value) => _fName = value,
+          ),
+        ),
+        PrimaryColorOverride(
+          color: kShrineBrown900,
+          child: TextFormField(
+            controller: _lastNameController,
+            decoration: InputDecoration(labelText: "last name"),
+            validator: (value) => value.isEmpty ? 'Last name can\'t be empty' : null,
+            onSaved: (value) => _lName = value,
+
+          ),
+        ),
+        PrimaryColorOverride(
+            color: kShrineBrown900,
+            child: new TextFormField(
+              controller: _emailController,
+              decoration: new InputDecoration(labelText: "email"),
+              validator: (value) =>
+                  value.isEmpty ? 'Email can\'t be empty' : null,
+              onSaved: (value) => _email = value,
+            )),
+
+        PrimaryColorOverride(
+          color: kShrineBrown900,
+          child: new TextFormField(
+            controller: _passwordController,
+            decoration: new InputDecoration(labelText: "password"),
+            validator: (value) =>
+                value.isEmpty ? 'Password can\'t be empty' : null,
+            onSaved: (value) => _password = value,
+            obscureText: true,
+          ),
+        ),
+        PrimaryColorOverride(
+          color: kShrineBrown900,
+          child: new TextFormField(
+            controller: _confirmPasswordController,
+            decoration: new InputDecoration(labelText: "confirm password"),
+            validator: (value) =>
+                value.isEmpty ? 'Confirm Password can\'t be empty' : null,
+            onSaved: (value) => _confirmPassword = value,
+            obscureText: true,
+          ),
+        )
+      ];
+    }
   }
 
   List<Widget> buildLoginButton() {
     if (_formType == FormType.login) {
       return [
-        SizedBox(height: 16.0),
-        RaisedButton(
-          color: Colors.redAccent,
-          child: Text(
-            "Sign in",
-            style: TextStyle(
-                fontFamily: 'Roboto',
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
-          ),
-          elevation: 8.0,
-          shape: BeveledRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(7.0))),
-          onPressed: validateAndSubmit,
+        //SizedBox(height: 16.0),
+        ButtonBar(
+          children: <Widget>[
+            RaisedButton(
+              color: Colors.redAccent,
+              child: Text(
+                "Sign in",
+                style: TextStyle(
+                    fontFamily: 'Roboto',
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+              elevation: 8.0,
+              shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(7.0))),
+              onPressed: validateAndSubmit,
+            )
+          ],
         )
       ];
     } else {
       //TODO: show registration flow
       return [
-        SizedBox(height: 16.0),
-        RaisedButton(
+        //SizedBox(height: 8.0),
+        ButtonBar(
+          children: <Widget>[
+                RaisedButton(
           color: Colors.redAccent,
           child: Text(
             "Register",
@@ -341,6 +401,10 @@ class _AuthPageState extends State<AuthPage> {
               borderRadius: BorderRadius.all(Radius.circular(7.0))),
           onPressed: validateAndSubmit,
         )
+          ],
+
+        )
+    
       ];
     }
   }
