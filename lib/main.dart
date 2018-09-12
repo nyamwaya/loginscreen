@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth_world/routes/auth_page.dart';
 import 'package:firebase_auth_world/routes/auth.dart';
 import 'package:firebase_auth_world/routes/root_page.dart';
-import 'package:firebase_auth_world/routes/login_folder/launch_page.dart';
+
 
 void main() => runApp(new MyApp());
 
