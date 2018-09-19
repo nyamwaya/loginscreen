@@ -98,14 +98,17 @@ class _AuthPageState extends State<AuthPage> {
     return new Scaffold(
         body: SafeArea(
       child: ListView(
-        // key: formKey,
+        shrinkWrap: true,
+        reverse: false,
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         children: <Widget>[
-          SizedBox(height: 15.0),
+          SizedBox(height: 100.0),
           Column(
-            
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset('assets/images/logo.png'),
+              Image.asset(
+                'assets/images/logo.png',
+                fit: BoxFit.scaleDown,),
               SizedBox(height: 16.0),
               Text(
                 'Kwizny',
