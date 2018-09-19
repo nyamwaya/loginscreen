@@ -17,7 +17,6 @@ class HomePage extends StatelessWidget {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -25,15 +24,31 @@ class HomePage extends StatelessWidget {
         title: new Text("Welcome"),
         actions: <Widget>[
           new FlatButton(
-            child: new Text("Logout", style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-            onPressed: _signOut
-          )
+              child: new Text("Logout",
+                  style: new TextStyle(fontSize: 17.0, color: Colors.white)),
+              onPressed: _signOut)
         ],
       ),
       body: new Container(
         child: new Center(
-          child: new Text("Welcome", style: new TextStyle(fontSize: 32.0))
+          child: new Text("Welcome", style: new TextStyle(fontSize: 32.0)),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0, // this will be set when a new tab is tapped
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.home), 
+            title: new Text('Home')
+            ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.favorite), 
+            title: new Text('favorites')
+            ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person), 
+              title: new Text('Profile'))
+        ],
       ),
     );
   }
