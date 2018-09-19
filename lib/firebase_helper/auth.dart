@@ -22,7 +22,7 @@ class Auth implements BaseAuth {
   Future<String> signInWithEmailAndPassword( String email, String password) async {
     FirebaseUser user = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
 
-    return user.uid + user.displayName;
+    return user.uid;
   }
 
   Future<String> createUserWithEmailAndPassword(String email, String password) async {
