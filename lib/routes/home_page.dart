@@ -34,12 +34,17 @@ class HomePage extends StatelessWidget {
           child: new Text("Welcome", style: new TextStyle(fontSize: 32.0)),
         ),
       ),
+      //To add on click events, follow this stack overflow answer
+      //https://stackoverflow.com/questions/50883918/bottom-navigation-bar-is-relaoding-all-the-widgets-each-time-i-press-a-navigatio
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0, // this will be set when a new tab is tapped
         items: [
+
           BottomNavigationBarItem(
             icon: new Icon(Icons.home), 
-            title: new Text('Home')
+            title: new Text('Home'),
+          
+            
             ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.favorite), 
