@@ -231,7 +231,7 @@ class _AuthPageState extends State<AuthPage> {
                             fontFamily: 'Quicksand',
                           )),
                       TextSpan(
-                          text: " Sign in.",
+                          text: " Sign In.",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
@@ -414,7 +414,7 @@ class _AuthPageState extends State<AuthPage> {
             RaisedButton(
               color: Colors.redAccent,
               child: Text(
-                "Next",
+                "Sign Up",
                 style: TextStyle(
                     fontFamily: 'Roboto',
                     color: Colors.white,
