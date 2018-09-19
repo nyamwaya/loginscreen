@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'auth.dart';
+import 'package:firebase_auth_world/firebase_helper/auth.dart';
 import 'package:firebase_auth_world/colors.dart';
 import 'package:firebase_auth_world/widgets/button_google.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:firebase_auth_world/firebase_helper/database.dart';
+
+
 class AuthPage extends StatefulWidget {
-  AuthPage({this.auth, this.onSignedIn});
+  AuthPage({this.databse, this.auth, this.onSignedIn});
   final BaseAuth auth;
+  final BaseDatabase databse;
   final VoidCallback onSignedIn;
 
   @override
@@ -24,12 +31,13 @@ class _AuthPageState extends State<AuthPage> {
   String _fName;
   String _lName;
 
+
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  
+
 
   FormType _formType = FormType.login;
 
@@ -52,9 +60,15 @@ class _AuthPageState extends State<AuthPage> {
               await widget.auth.signInWithEmailAndPassword(_email, _password);
           print("Signed in: $userId");
         } else {
-          String userId = await widget.auth
-              .createUserWithEmailAndPassword(_email, _password);
-          print("Registered user: $userId");
+          //TODO: save name and info here??
+          String userId = await widget.auth.createUserWithEmailAndPassword(_email, _password);
+          print("Registered user: $userId ");
+
+          await widget.databse.pushProfileToDatabase(userId, _fName, _email);
+
+         
+
+        
         }
         widget.onSignedIn();
       } catch (e) {
@@ -312,16 +326,16 @@ class _AuthPageState extends State<AuthPage> {
             onSaved: (value) => _fName = value,
           ),
         ),
-        PrimaryColorOverride(
-          color: kShrineBrown900,
-          child: TextFormField(
-            controller: _lastNameController,
-            decoration: InputDecoration(labelText: "last name"),
-            validator: (value) => value.isEmpty ? 'Last name can\'t be empty' : null,
-            onSaved: (value) => _lName = value,
+        // PrimaryColorOverride(
+        //   color: kShrineBrown900,
+        //   child: TextFormField(
+        //     controller: _lastNameController,
+        //     decoration: InputDecoration(labelText: "last name"),
+        //     validator: (value) => value.isEmpty ? 'Last name can\'t be empty' : null,
+        //     onSaved: (value) => _lName = value,
 
-          ),
-        ),
+        //   ),
+        // ),
         PrimaryColorOverride(
             color: kShrineBrown900,
             child: new TextFormField(
@@ -343,17 +357,18 @@ class _AuthPageState extends State<AuthPage> {
             obscureText: true,
           ),
         ),
-        PrimaryColorOverride(
-          color: kShrineBrown900,
-          child: new TextFormField(
-            controller: _confirmPasswordController,
-            decoration: new InputDecoration(labelText: "confirm password"),
-            validator: (value) =>
-                value.isEmpty ? 'Confirm Password can\'t be empty' : null,
-            onSaved: (value) => _confirmPassword = value,
-            obscureText: true,
-          ),
-        )
+        // TODO: uncoment once you get the update username figured out
+        //PrimaryColorOverride(
+        //   color: kShrineBrown900,
+        //   child: new TextFormField(
+        //     controller: _confirmPasswordController,
+        //     decoration: new InputDecoration(labelText: "confirm password"),
+        //     validator: (value) =>
+        //         value.isEmpty ? 'Confirm Password can\'t be empty' : null,
+        //     onSaved: (value) => _confirmPassword = value,
+        //     obscureText: true,
+        //   ),
+        // )
       ];
     }
   }
@@ -390,7 +405,7 @@ class _AuthPageState extends State<AuthPage> {
                 RaisedButton(
           color: Colors.redAccent,
           child: Text(
-            "Register",
+            "Next",
             style: TextStyle(
                 fontFamily: 'Roboto',
                 color: Colors.white,

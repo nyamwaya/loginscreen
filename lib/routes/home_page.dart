@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'auth.dart';
+import 'package:firebase_auth_world/firebase_helper/auth.dart';
+import 'package:firebase_auth_world/firebase_helper/database.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({this.auth, this.onSignedOut});
+  HomePage({this.auth, this.onSignedOut, this.databse});
   final BaseAuth auth;
+  final BaseDatabase databse;
   final VoidCallback onSignedOut;
 
   void _signOut() async {
@@ -35,6 +37,4 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
-
 }
