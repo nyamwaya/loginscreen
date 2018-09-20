@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:firebase_auth_world/model/Kwizn.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth_world/firebase_helper/auth.dart';
 import 'package:firebase_auth_world/firebase_helper/database.dart';
@@ -9,14 +13,22 @@ class HomePage extends StatefulWidget {
   final BaseDatabase databse;
   final VoidCallback onSignedOut;
 
-    @override
+  @override
   State<StatefulWidget> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
+class _HomePageState extends State<HomePage> {
+  final generalReference = FirebaseDatabase.instance.reference().child('kwizn');
 
-  Color gradientStart =Colors.deepPurple[700]; //Change start gradient color here
+  Color gradientStart =
+      Colors.deepPurple[700]; //Change start gradient color here
   Color gradientEnd = Colors.purple[500]; //Change end gradient color here
+
+  String _kwizinTitle;
+
+  List<Kwizn> data;
+
+  StreamSubscription<Event> _onKwizineAddedSubscription;
 
   void _signOut() async {
     //TODO: implement auto sign user out if userId is not valid
@@ -29,12 +41,21 @@ class _HomePageState extends State<HomePage>{
   }
 
   @override
-    void initState() {
-      // TODO: implement initState
-      super.initState();
+  void initState() {
+    super.initState();
+    data = new List();
+    //this.widget.databse.getkwizn().then(_updateKwizn);
+    _onKwizineAddedSubscription = generalReference.onChildAdded.listen(_onKwiznAdded);
+  }
+
+  @override
+    void dispose() {
+      // TODO: implement dispose
+      super.dispose();
+      _onKwizineAddedSubscription.cancel();
     }
- 
- @override
+
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       // backgroundColor: Colors.grey,
@@ -48,26 +69,32 @@ class _HomePageState extends State<HomePage>{
               onPressed: _signOut)
         ],
       ),
-      body: new ListView(
-        children: <Widget>[
-          new Restaurantcard(
-            headImmageAssetpath: 'assets/images/salad.jpg',
-            title: "Surpise Salad",
-            subtitle: 'Minneaplis, Mn',
-            heartCoutn: 240,
-          ),
-          new Restaurantcard(
-              headImmageAssetpath: 'assets/images/my.jpg',
-              title: "Mochie",
-              subtitle: 'Minneapolis, Mn',
-              heartCoutn: 1392),
-          new Restaurantcard(
-              headImmageAssetpath: 'assets/images/test.jpg',
-              title: "The dog",
-              subtitle: 'Minneapolis, MN',
-              heartCoutn: 350),
-        ],
-      ),
+       body: Center(
+         child: ListView.builder(
+           itemCount: data == null ? 0 : data.length,
+           padding: const EdgeInsets.all(15.0),
+           itemBuilder: (context, position){
+             return new Restaurantcard(
+               title: '${data[position].name}',
+               subtitle: '${data[position].city_state}',
+               headImmageAssetpath: 'assets/images/salad.jpg',
+               heartCoutn: 50
+
+             );
+           },
+         ),
+       ),
+      // ListView.builder(
+      //   itemCount: data == null ? 0 : data.length,
+      //   itemBuilder: (BuildContext context, int index) {
+      //     return new Restaurantcard(
+      //       title: data.single.name,
+      //       headImmageAssetpath: 'assets/images/salad.jpg',
+      //       heartCoutn: 50,
+      //       subtitle: _kwizinTitle,
+      //     );
+      //   },
+      // ),
       //To add on click events, follow this stack overflow answer
       //https://stackoverflow.com/questions/50883918/bottom-navigation-bar-is-relaoding-all-the-widgets-each-time-i-press-a-navigatio
       bottomNavigationBar: BottomNavigationBar(
@@ -86,17 +113,21 @@ class _HomePageState extends State<HomePage>{
     );
   }
 
+  _updateKwizn(Kwizn value) {
+    // var name =
+    this.setState(() {
+      this._kwizinTitle = value.name;
+      print("The data is: $value");
+    });
+  }
 
+  _onKwiznAdded(Event event) {
+    setState(() {
+          data.add(new Kwizn.fromSnapshot(event.snapshot));
+          print("The data is: $event");
+        });
+  }
 }
-
-
-
-
- 
-
- 
-
-
 
 //
 // class Kwizn {
@@ -107,11 +138,7 @@ class _HomePageState extends State<HomePage>{
 //     name == data['name'];
 //     if (name == null) {
 //       name = '';
-      
+
 //     }
 //   }
 // }
-
-
-
-
