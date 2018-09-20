@@ -3,35 +3,33 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 class Kwizn {
-  String key;
-  String address;
-  String city_state;
-  String name;
-  String picture_url;
+  String _id;
+  String _address;
+  String _city_state;
+  String _name;
+  String _picture_url;
 
-  Kwizn (this.address, this.city_state, this.name, this.picture_url);
+  Kwizn (this._id, this._address, this._city_state, this._name, this._picture_url);
 
-    Kwizn.fromJson(this.key, Map data ){
-    name == data['name'];
-    if (name == null) {
-      name = '';
-      
-    }
+  Kwizn.map(dynamic obj){
+    this._id = obj['id'];
+    this._address = obj['address'];
+    this._city_state = obj['city_state'];
+    this._name = obj['name'];
+    this._picture_url = obj['picture_url'];
   }
 
-  // Kwizn.fromSnapshot(DataSnapshot snapshot) 
-  //     : key = snapshot.key,
-  //     address = snapshot.value['address'],
-  //     city_state = snapshot.value['city_state'],
-  //     name = snapshot.value['name'],
-  //     picture_url = snapshot.value['picture_url'];
+  String get id => _id;
+  String get address => _address;
+  String get city_state => _city_state;
+  String get name => _name;
+  String get picture_url => _picture_url;
 
-  toJson() {
-    return {
-      'address': address, 
-      'city_state': city_state,
-      'name': name,
-      'picture_url': picture_url,
-    };
+  Kwizn.fromSnapshot(DataSnapshot snapshot){
+    _id = snapshot.key;
+    _address = snapshot.value['address'];
+    _city_state = snapshot.value['city_state'];
+    _name = snapshot.value['name'];
+    _picture_url = snapshot.value['picture_url'];
   }
 }
