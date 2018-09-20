@@ -24,11 +24,10 @@ class _HomePageState extends State<HomePage> {
       Colors.deepPurple[700]; //Change start gradient color here
   Color gradientEnd = Colors.purple[500]; //Change end gradient color here
 
-  String _kwizinTitle;
-
   List<Kwizn> data;
 
   StreamSubscription<Event> _onKwizineAddedSubscription;
+  StreamSubscription<Event> _onNoteChangedSubscription;
 
   void _signOut() async {
     //TODO: implement auto sign user out if userId is not valid
@@ -45,15 +44,18 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     data = new List();
     //this.widget.databse.getkwizn().then(_updateKwizn);
-    _onKwizineAddedSubscription = generalReference.onChildAdded.listen(_onKwiznAdded);
+    _onKwizineAddedSubscription =
+        generalReference.onChildAdded.listen(_onKwiznAdded);
+    _onNoteChangedSubscription =
+        generalReference.onChildChanged.listen(_onNoteUpdated);
   }
 
   @override
-    void dispose() {
-      // TODO: implement dispose
-      super.dispose();
-      _onKwizineAddedSubscription.cancel();
-    }
+  void dispose() {
+    _onKwizineAddedSubscription.cancel();
+    _onNoteChangedSubscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,32 +71,20 @@ class _HomePageState extends State<HomePage> {
               onPressed: _signOut)
         ],
       ),
-       body: Center(
-         child: ListView.builder(
-           itemCount: data == null ? 0 : data.length,
-           padding: const EdgeInsets.all(15.0),
-           itemBuilder: (context, position){
-             return new Restaurantcard(
-               title: '${data[position].name}',
-               subtitle: '${data[position].city_state}',
-               headImmageAssetpath: 'assets/images/salad.jpg',
-               heartCoutn: 50
+      body: Center(
+        child: ListView.builder(
+          itemCount: data == null ? 0 : data.length,
+          itemBuilder: (BuildContext context, int index) {
+            return new Restaurantcard(
+              title: '${data[index].name}',
+              subtitle: '${data[index].city_state}',
+              headImmageAssetpath: 'assets/images/salad.jpg',
+              heartCoutn: 50,
+            );
+          },
+        ),
+      ),
 
-             );
-           },
-         ),
-       ),
-      // ListView.builder(
-      //   itemCount: data == null ? 0 : data.length,
-      //   itemBuilder: (BuildContext context, int index) {
-      //     return new Restaurantcard(
-      //       title: data.single.name,
-      //       headImmageAssetpath: 'assets/images/salad.jpg',
-      //       heartCoutn: 50,
-      //       subtitle: _kwizinTitle,
-      //     );
-      //   },
-      // ),
       //To add on click events, follow this stack overflow answer
       //https://stackoverflow.com/questions/50883918/bottom-navigation-bar-is-relaoding-all-the-widgets-each-time-i-press-a-navigatio
       bottomNavigationBar: BottomNavigationBar(
@@ -113,19 +103,19 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _updateKwizn(Kwizn value) {
-    // var name =
-    this.setState(() {
-      this._kwizinTitle = value.name;
-      print("The data is: $value");
+  _onKwiznAdded(Event event) {
+    setState(() {
+      data.add(new Kwizn.fromSnapshot(event.snapshot));
     });
   }
 
-  _onKwiznAdded(Event event) {
+  _onNoteUpdated(Event event) {
+    var oldKwizinValue =
+        data.singleWhere((kwizn) => kwizn.id == event.snapshot.key);
     setState(() {
-          data.add(new Kwizn.fromSnapshot(event.snapshot));
-          print("The data is: $event");
-        });
+      data[data.indexOf(oldKwizinValue)] =
+          new Kwizn.fromSnapshot(event.snapshot);
+    });
   }
 }
 
