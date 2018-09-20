@@ -27,12 +27,8 @@ class HomePage extends StatelessWidget {
     return new Scaffold(
       // backgroundColor: Colors.grey,
       appBar: new AppBar(
-        title: new Text(
-          "Kwizny",
-          style: TextStyle(
-            fontFamily: 'Quicksand',
-          ),
-        ),
+        title: new Text("Kwizny"),
+        backgroundColor: Colors.red,
         actions: <Widget>[
           new FlatButton(
               child: new Text("Logout",
@@ -46,20 +42,18 @@ class HomePage extends StatelessWidget {
             headImmageAssetpath: 'assets/images/salad.jpg',
             title: "Surpise Salad",
             subtitle: 'Minneaplis, Mn',
-            heartCoutn: 240,),
-          new Restaurantcard(
-            headImmageAssetpath: 'assets/images/my.jpg',
-            title: "Mochie",
-            subtitle: 'Minneapolis, Mn',
-             heartCoutn: 1392
+            heartCoutn: 240,
           ),
           new Restaurantcard(
-            headImmageAssetpath: 'assets/images/test.jpg',
-            title: "The dog",
-            subtitle: 'Minneapolis, MN',
-             heartCoutn: 350
-          ),
-          
+              headImmageAssetpath: 'assets/images/my.jpg',
+              title: "Mochie",
+              subtitle: 'Minneapolis, Mn',
+              heartCoutn: 1392),
+          new Restaurantcard(
+              headImmageAssetpath: 'assets/images/test.jpg',
+              title: "The dog",
+              subtitle: 'Minneapolis, MN',
+              heartCoutn: 350),
         ],
       ),
       //To add on click events, follow this stack overflow answer
@@ -71,12 +65,8 @@ class HomePage extends StatelessWidget {
             icon: new Icon(Icons.home),
             title: new Text('Home'),
           ),
-
-          // Enable this once you have favorite or bookmarks working
-          // BottomNavigationBarItem(
-          //   icon: new Icon(Icons.favorite),
-          //   title: new Text('favorites')
-          //   ),
+          BottomNavigationBarItem(
+              icon: new Icon(Icons.favorite), title: new Text('favorites')),
           BottomNavigationBarItem(
               icon: Icon(Icons.person), title: new Text('Profile'))
         ],
