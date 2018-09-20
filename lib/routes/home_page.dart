@@ -3,26 +3,38 @@ import 'package:firebase_auth_world/firebase_helper/auth.dart';
 import 'package:firebase_auth_world/firebase_helper/database.dart';
 import 'package:firebase_auth_world/widgets/RestaurantCard.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({this.auth, this.onSignedOut, this.databse});
   final BaseAuth auth;
   final BaseDatabase databse;
   final VoidCallback onSignedOut;
 
-  Color gradientStart =
-      Colors.deepPurple[700]; //Change start gradient color here
+    @override
+  State<StatefulWidget> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>{
+
+  Color gradientStart =Colors.deepPurple[700]; //Change start gradient color here
   Color gradientEnd = Colors.purple[500]; //Change end gradient color here
 
   void _signOut() async {
+    //TODO: implement auto sign user out if userId is not valid
     try {
-      await auth.signOut();
-      onSignedOut();
+      await widget.auth.signOut();
+      widget.onSignedOut();
     } catch (e) {
       print(e);
     }
   }
 
   @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+    }
+ 
+ @override
   Widget build(BuildContext context) {
     return new Scaffold(
       // backgroundColor: Colors.grey,
@@ -73,4 +85,33 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
+
 }
+
+
+
+
+ 
+
+ 
+
+
+
+//
+// class Kwizn {
+//   final String key;
+//   String name;
+
+//   Kwizn.fromJson(this.key, Map data ){
+//     name == data['name'];
+//     if (name == null) {
+//       name = '';
+      
+//     }
+//   }
+// }
+
+
+
+
