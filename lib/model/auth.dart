@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
-import 'package:firebase_auth_world/firebase_helper/database.dart';
+import 'package:firebase_auth_world/model/database.dart';
 
 
 

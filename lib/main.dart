@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth_world/routes/auth_page.dart';
-import 'package:firebase_auth_world/firebase_helper/auth.dart';
+import 'package:firebase_auth_world/model/auth.dart';
 import 'package:firebase_auth_world/routes/root_page.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:firebase_auth_world/firebase_helper/database.dart';
+import 'package:firebase_auth_world/model/database.dart';
 
 
 
