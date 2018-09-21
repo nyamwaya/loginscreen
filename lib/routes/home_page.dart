@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:firebase_auth_world/model/Kwizn.dart';
+import 'package:firebase_auth_world/model/auth.dart';
+import 'package:firebase_auth_world/model/database.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth_world/firebase_helper/auth.dart';
-import 'package:firebase_auth_world/firebase_helper/database.dart';
 import 'package:firebase_auth_world/widgets/RestaurantCard.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,13 +1,13 @@
+import 'package:firebase_auth_world/model/auth.dart';
+import 'package:firebase_auth_world/model/database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth_world/firebase_helper/auth.dart';
 import 'package:firebase_auth_world/colors.dart';
 import 'package:firebase_auth_world/widgets/button_google.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:firebase_auth_world/firebase_helper/database.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AuthPage extends StatefulWidget {
