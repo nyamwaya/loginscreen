@@ -4,21 +4,22 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'dart:async';
 import 'package:firebase_auth_world/model/Kwizn.dart';
 
+/*
+This class is the model for how we access the firebase realtime database. 
+Eventually, we will separate all firebase database concerns into this class
+for now we only have the push prof 
+*/
+
 abstract class BaseDatabase {
-  Future<String> pushProfileToDatabase(
-      String userID, String displyName, String email);
-  // Future<StreamSubscription<Event>> getKwiznStream(
-  //     String kwiznKey, void onData(Kwizn kwizn));
-  // Future<Kwizn> getkwizn();
+  Future<String> pushProfileToDatabase(String userID, String displyName, String email);
 }
 
 class Database implements BaseDatabase {
+  
   final generalReference = FirebaseDatabase.instance;
 
-  // post a user's profile data stored under users/userID, store the first name and email.
-  // concider retruning void becayse we don't use any information it returns, nor does the firebase function return anything.
-  Future<String> pushProfileToDatabase(
-      String userID, String displyName, String email) async {
+  //Post a user's profile data to the realtime database user thier userId
+  Future<String> pushProfileToDatabase(String userID, String displyName, String email) async {
     generalReference
         .reference()
         .child('users/' + userID)
@@ -27,42 +28,4 @@ class Database implements BaseDatabase {
     return displyName;
   }
 
-  // Future<StreamSubscription<Event>> getKwiznStream(
-  //     String kwiznKey, void Function(Kwizn kwizn) onData) async {
-  //   // what is an account key?
-  //   //String accountKey = await Preferences.getAccountKey();
-  //   StreamSubscription<Event> subscription = generalReference
-  //       .reference()
-  //       .child('kwizn')
-  //       // .child(accountKey)
-  //       // .child('kwizn')
-  //       .onValue
-  //       .listen((Event event) {
-  //     var kwizn = new Kwizn.fromJson(event.snapshot.key, event.snapshot.value);
-  //     onData(kwizn);
-  //   });
-
-  //   return subscription;
-  // }
-
-  // Future<Kwizn> getkwizn() async {
-  //   Completer<Kwizn> completer = new Completer<Kwizn>();
-
-  //   //com up with a random account key
-  //   //String accountKey = await Preferences.getAccountKey();
-
-  //   FirebaseDatabase.instance
-  //       .reference()
-  //       .child('kwizn/check')
-  //       // .child(accountKey)
-  //       // .child('kwizn')
-  //       //.child(kwiznKey)
-  //       .once()
-  //       .then((DataSnapshot snapshot) {
-  //     var kwizn = new Kwizn.fromJson(snapshot.key, snapshot.value);
-  //     completer.complete(kwizn);
-  //   });
-  //   //print("The data is: $value");
-  //   return completer.future;
-  // }
 }
