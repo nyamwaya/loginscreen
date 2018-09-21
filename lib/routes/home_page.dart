@@ -20,8 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final generalReference = FirebaseDatabase.instance.reference().child('kwizn');
 
-  Color gradientStart =
-      Colors.deepPurple[700]; //Change start gradient color here
+  Color gradientStart = Colors.deepPurple[700]; //Change start gradient color here
   Color gradientEnd = Colors.purple[500]; //Change end gradient color here
 
   List<Kwizn> data;
@@ -60,7 +59,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      // backgroundColor: Colors.grey,
       appBar: new AppBar(
         title: new Text("Kwizny"),
         backgroundColor: Colors.red,
@@ -78,6 +76,7 @@ class _HomePageState extends State<HomePage> {
             return new Restaurantcard(
               title: '${data[index].name}',
               subtitle: '${data[index].city_state}',
+           //   headImmageAssetpath: '${data[index].picture_url}',
               headImmageAssetpath: 'assets/images/salad.jpg',
               heartCoutn: 50,
             );
@@ -119,16 +118,3 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-//
-// class Kwizn {
-//   final String key;
-//   String name;
-
-//   Kwizn.fromJson(this.key, Map data ){
-//     name == data['name'];
-//     if (name == null) {
-//       name = '';
-
-//     }
-//   }
-// }

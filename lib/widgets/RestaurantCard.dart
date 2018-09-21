@@ -1,22 +1,17 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 //This is the card of a kwizni
 
 class Restaurantcard extends StatelessWidget {
-
   final String headImmageAssetpath;
   final String title;
   final String subtitle;
   final int heartCoutn;
 
-  Restaurantcard({
-    this.headImmageAssetpath,
-    this.title,
-    this.subtitle,
-    this.heartCoutn
-  });
-
-
+  Restaurantcard(
+      {this.headImmageAssetpath, this.title, this.subtitle, this.heartCoutn});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +21,14 @@ class Restaurantcard extends StatelessWidget {
         elevation: 10.0,
         child: new Column(
           children: <Widget>[
+            // new ImageURI(
+            //   imageUri: headImmageAssetpath,
+            //   width: double.infinity,
+            //   height: 250.0,
+            //   fit: BoxFit.cover,
+             
+            // ),
+
             new Image.asset(
               headImmageAssetpath,
               width: double.infinity,
