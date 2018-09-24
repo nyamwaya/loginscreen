@@ -1,6 +1,7 @@
 import 'package:firebase_auth_world/model/Kwizn.dart';
 import 'package:firebase_auth_world/routes/color_detail_page.dart';
 import 'package:firebase_auth_world/routes/favorites.dart';
+import 'package:firebase_auth_world/routes/kwizn_detail_page.dart';
 import 'package:firebase_auth_world/routes/kwiznyListPage.dart';
 import 'package:firebase_auth_world/routes/profile_page.dart';
 import 'package:firebase_auth_world/widgets/bottom_navigation.dart';
@@ -35,11 +36,15 @@ class TabNavigator extends StatelessWidget {
       return {
         TabNavigatorRoutes.root: (context) => KwiznyListPage(
               data: data,
-              onPush: (materialIndex) => _push(context, materialIndex: materialIndex),
+              onPush: (materialIndex) =>
+                  _push(context, materialIndex: materialIndex),
             ),
-        TabNavigatorRoutes.detail: (context) => ColorDetailPage(
+        TabNavigatorRoutes.detail: (context) => KwiznDetailpage(
               color: TabHelper.color(tabItem),
-              title: TabHelper.description(tabItem),
+              title: data[materialIndex].name,
+              address: data[materialIndex].address,
+              cityState: data[materialIndex].city_state,
+              pictureUrl: data[materialIndex].picture_url,
               materialIndex: materialIndex,
             ),
       };

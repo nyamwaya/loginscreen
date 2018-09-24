@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class KwiznyListPage extends StatefulWidget {
   KwiznyListPage({this.data, this.onPush});
   final List<Kwizn> data;
-  final ValueChanged(int) onPush;
+  final ValueChanged<int> onPush;
+  
 
   @override
   State<StatefulWidget> createState() => _KwiznyListPageState();
@@ -19,16 +20,22 @@ class _KwiznyListPageState extends State<KwiznyListPage> {
     );
   }
 
+
+
   Widget _buildList() {
     return Center(
       child: ListView.builder(
         itemCount: widget.data == null ? 0 : widget.data.length,
         itemBuilder: (BuildContext context, int index) {
-          return new Restaurantcard(
-            title: '${widget.data[index].name}',
+          int materialIndex = index;
+          return new GestureDetector(
+            onTap: () => widget.onPush(materialIndex),
+            child: new Restaurantcard(
+            title: '${widget.data[index].id}',
             subtitle: '${widget.data[index].city_state}',
             headImmageAssetpath: '${widget.data[index].picture_url}',
             heartCoutn: 50,
+          ),
           );
         },
       ),
