@@ -1,11 +1,10 @@
 import 'package:firebase_auth_world/model/Kwizn.dart';
-import 'package:firebase_auth_world/routes/color_detail_page.dart';
 import 'package:firebase_auth_world/routes/favorites.dart';
 import 'package:firebase_auth_world/routes/kwizn_detail_page.dart';
 import 'package:firebase_auth_world/routes/kwiznyListPage.dart';
 import 'package:firebase_auth_world/routes/profile_page.dart';
 import 'package:firebase_auth_world/widgets/bottom_navigation.dart';
-import 'package:firebase_auth_world/widgets/colors_list_page.dart';
+
 import 'package:flutter/material.dart';
 
 class TabNavigatorRoutes {
