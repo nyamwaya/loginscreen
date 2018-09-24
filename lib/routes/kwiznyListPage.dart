@@ -1,4 +1,5 @@
 import 'package:firebase_auth_world/model/Kwizn.dart';
+import 'package:firebase_auth_world/routes/kwizn_detail_page.dart';
 import 'package:firebase_auth_world/widgets/RestaurantCard.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,17 @@ class _KwiznyListPageState extends State<KwiznyListPage> {
         itemBuilder: (BuildContext context, int index) {
           int materialIndex = index;
           return new GestureDetector(
-            onTap: () => widget.onPush(materialIndex),
+           //Alternative way to do onTap..idk which way is prefered so I will do the other one, If You run into navigation issues with the details page, try this one.
+           // onTap: () => widget.onPush(materialIndex),
+            onTap: () => Navigator.of(context).push(new PageRouteBuilder(
+               pageBuilder: (_, __, ___) => new KwiznDetailpage(
+                address: '${widget.data[index].address}',
+                cityState: '${widget.data[index].city_state}',
+                //rmaterialIndex: index,
+                pictureUrl: '${widget.data[index].picture_url}',
+                title: '${widget.data[index].id}',
+              ),
+            )),
             child: new Restaurantcard(
             title: '${widget.data[index].id}',
             subtitle: '${widget.data[index].city_state}',

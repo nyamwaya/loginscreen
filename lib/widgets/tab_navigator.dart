@@ -19,8 +19,13 @@ class TabNavigator extends StatelessWidget {
   final TabItem tabItem;
   final List<Kwizn> data;
 
-  void _push(BuildContext context, {int materialIndex: 500}) {
-    var routeBuilders = _routeBuilders(context, materialIndex: materialIndex);
+  void _push(
+    BuildContext context,
+    /*{int materialIndex: 500}enable other routing to work*/
+  ) {
+    var routeBuilders = _routeBuilders(
+      context, /*materialIndex: materialIndex enable other routing to work*/
+    );
 
     Navigator.push(
       context,
@@ -30,23 +35,26 @@ class TabNavigator extends StatelessWidget {
     );
   }
 
-  Map<String, WidgetBuilder> _routeBuilders(BuildContext context,
-      {int materialIndex: 500}) {
+  Map<String, WidgetBuilder> _routeBuilders(
+    BuildContext context,
+    /* {int materialIndex: 500} enable other routing to work*/
+  ) {
     if (tabItem == TabItem.home) {
       return {
         TabNavigatorRoutes.root: (context) => KwiznyListPage(
               data: data,
-              onPush: (materialIndex) =>
-                  _push(context, materialIndex: materialIndex),
+              onPush: (materialIndex) => _push(
+                    context, /* materialIndex: materialIndex enable other routing to work*/
+                  ),
             ),
-        TabNavigatorRoutes.detail: (context) => KwiznDetailpage(
+        /*  TabNavigatorRoutes.detail: (context) => KwiznDetailpage(
               color: TabHelper.color(tabItem),
               title: data[materialIndex].name,
               address: data[materialIndex].address,
               cityState: data[materialIndex].city_state,
               pictureUrl: data[materialIndex].picture_url,
               materialIndex: materialIndex,
-            ),
+            ), enable other routing to work*/
       };
     } else if (tabItem == TabItem.favorites) {
       return {
