@@ -19,11 +19,11 @@ class TabHelper {
   static String description(TabItem tabItem) {
     switch (tabItem) {
       case TabItem.home:
-        return 'red';
+        return 'Home';
       case TabItem.favorites:
-        return 'green';
+        return 'Favorites';
       case TabItem.profile:
-        return 'blue';
+        return 'Profile';
     }
     return '';
   }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth_world/widgets/ImageURILoad.dart';
 import 'package:flutter/material.dart';
 
 //This is the card of a kwizni
@@ -21,20 +22,22 @@ class Restaurantcard extends StatelessWidget {
         elevation: 10.0,
         child: new Column(
           children: <Widget>[
-            // new ImageURI(
-            //   imageUri: headImmageAssetpath,
-            //   width: double.infinity,
-            //   height: 250.0,
-            //   fit: BoxFit.cover,
-             
-            // ),
-
-            new Image.asset(
-              headImmageAssetpath,
+            //This loads an immage from the netwrok. Used on prod version of app
+            new ImageURILoader(
+              imageUri: headImmageAssetpath,
               width: double.infinity,
               height: 250.0,
               fit: BoxFit.cover,
+             
             ),
+
+            // for loadign local assets..used when you do local debug
+            //new Image.asset(
+            //   headImmageAssetpath,
+            //   width: double.infinity,
+            //   height: 250.0,
+            //   fit: BoxFit.cover,
+            // ),
             new Row(
               children: <Widget>[
                 //  TODO: Maybe use this code to highlight if a meal has a specialty eg. Gluten free
