@@ -73,8 +73,7 @@ class _HomePageState extends State<HomePage> {
                 return new Restaurantcard(
                   title: '${data[index].name}',
                   subtitle: '${data[index].city_state}',
-               //   headImmageAssetpath: '${data[index].picture_url}',
-                  headImmageAssetpath: 'assets/images/salad.jpg',
+                  headImmageAssetpath: '${data[index].picture_url}',
                   heartCoutn: 50,
                 );
               },
@@ -90,8 +89,9 @@ class _HomePageState extends State<HomePage> {
                 icon: new Icon(Icons.home),
                 title: new Text('Home'),
               ),
-              BottomNavigationBarItem(
-                  icon: new Icon(Icons.favorite), title: new Text('favorites')),
+              //Don't show favorites
+              // BottomNavigationBarItem(
+              //     icon: new Icon(Icons.favorite), title: new Text('favorites')),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person), title: new Text('Profile'))
             ],
