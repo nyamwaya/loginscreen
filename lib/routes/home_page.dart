@@ -95,16 +95,16 @@ class _HomePageState extends State<HomePage> {
       onWillPop: () async =>
           !await navigatorKeys[currentTab].currentState.maybePop(),
       child: Scaffold(
-        appBar: new AppBar(
-          title: new Text("Kwizny"),
-          backgroundColor: Colors.red,
-          actions: <Widget>[
-            new FlatButton(
-                child: new Text("Logout",
-                    style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-                onPressed: _signOut)
-          ],
-        ),
+        // appBar: new AppBar(
+        //   title: new Text("Kwizny"),
+        //   backgroundColor: Colors.red,
+        //   actions: <Widget>[
+        //     new FlatButton(
+        //         child: new Text("Logout",
+        //             style: new TextStyle(fontSize: 17.0, color: Colors.white)),
+        //         onPressed: _signOut)
+        //   ],
+        // ),
          body: Stack(children: <Widget>[
           _buildOffstageNavigator(TabItem.home),
           _buildOffstageNavigator(TabItem.favorites),
