@@ -51,6 +51,8 @@ flutter:
     - assets/images/test.jpg
     - assets/images/save.jpg
     - assets/images/my.jpg
+    - assets/images/ic_distance.png
+    - assets/images/ic_gravity.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

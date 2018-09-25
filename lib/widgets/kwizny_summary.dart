@@ -15,27 +15,8 @@ class KwiznySummary extends StatelessWidget{
   
   final bool horizontal;
 
-  
-
-
-
   @override
   Widget build(BuildContext context) {
-
-    final planetThumbnail = new Container(
-      margin: new EdgeInsets.symmetric(
-        vertical: 16.0
-      ),
-      alignment: horizontal ? FractionalOffset.centerLeft : FractionalOffset.center,
-      child: new Hero(
-          tag: '$title',
-          child: new Image(
-          image: new AssetImage('assets/images/my.jpg'),
-          height: 92.0,
-          width: 92.0,
-        ),
-      ),
-    );
 
 
 

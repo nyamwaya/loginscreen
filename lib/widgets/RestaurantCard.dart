@@ -28,7 +28,6 @@ class Restaurantcard extends StatelessWidget {
               width: double.infinity,
               height: 250.0,
               fit: BoxFit.cover,
-             
             ),
 
             // for loadign local assets..used when you do local debug
