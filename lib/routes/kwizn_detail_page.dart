@@ -28,15 +28,13 @@ class KwiznDetailpage extends StatelessWidget {
         color: new Color(0xFFFFFF),
         child: new ListView(
           padding: const EdgeInsets.all(1.0),
-
           children: <Widget>[
             _getToolbar(context),
             _getBackground(),
-            //_buildHeader(),
+            _buildHeader(),
             // _buildContent(),
             // _getGradient(),
             //_getContent(),
-            
           ],
         ),
       ),
@@ -59,7 +57,7 @@ class KwiznDetailpage extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
       height: 218.0,
       child: new Card(
-        elevation: 500.0,
+        elevation: 10.0,
         child: new Column(
           children: <Widget>[
             new ClipRRect(
@@ -79,33 +77,72 @@ class KwiznDetailpage extends StatelessWidget {
 
   Container _buildHeader() {
     return new Container(
-      margin: new EdgeInsets.fromLTRB(16.0, 42.0, 16.0, 16.0),
-      constraints: new BoxConstraints.expand(),
+        child: new Padding(
+      padding: const EdgeInsets.only(top: 20.0),
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          new Container(height: 4.0,),
-          new Expanded(
-            child: new Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+          new Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              new Text(
+                title,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600),
+              ),
+              new Text(
+                cityState,
+                style: TextStyle(
+                    color: Colors.black45,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400),
+              ),
+              new Row(
+                //mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Text(
-                    title,
-                    style: TextStyle(
-                        fontSize: 40.0,
-                        fontFamily: 'Quicksand',
-                        color: Colors.red),
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: new Column(
+                        //crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          _kwiznyValue(
+                              value: '5 Mins',
+                              image: 'assets/images/ic_distance.png'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  new Expanded(
+                    child: _kwiznyValue(
+                        value: '20 coments',
+                        image: 'assets/images/ic_gravity.png'),
                   )
                 ],
-              ),
-            ),
-          )
+              )
+            ],
+          ),
         ],
       ),
+    ));
+  }
 
-
+  Widget _kwiznyValue({String value, String image}) {
+    return new Container(
+      child: new Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
+        new Image.asset(image, height: 12.0),
+        new Container(width: 8.0),
+        new Text(
+          value,
+          style: TextStyle(
+              color: Colors.black54,
+              fontSize: 14.0,
+              fontWeight: FontWeight.w400,
+              fontFamily: 'Quicksand'),
+        ),
+      ]),
     );
   }
 
