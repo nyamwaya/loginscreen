@@ -30,29 +30,31 @@ class KwiznDetailpage extends StatelessWidget {
           padding: const EdgeInsets.all(1.0),
           children: <Widget>[
             _getToolbar(context),
-            _getBackground(),
+            _buildBackgroundImage(),
             _buildHeader(),
-            // _buildContent(),
-            // _getGradient(),
-            //_getContent(),
+            _buildSeparator(),
+            _buildDescription(),
+           // _buildSeparator(),
+            _buildMap()
           ],
         ),
       ),
     );
   }
 
-  // Container _buildContent() {
-  //   return new Container(
-  //     child: new ListView(
-  //     padding: new EdgeInsets.fromLTRB(0.0, 72.0, 0.0, 32.0),
-  //     children: <Widget>[
-  //       new KwiznySummary(title, cityState)
+  Container _getToolbar(BuildContext context) {
+    return new Container(
+      margin: new EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      child: new Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new BackButton(color: Colors.black45),
+        ],
+      ),
+    );
+  }
 
-  //     ],
-  //   ));
-  // }
-
-  Container _getBackground() {
+  Container _buildBackgroundImage() {
     return new Container(
       padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
       height: 218.0,
@@ -79,86 +81,114 @@ class KwiznDetailpage extends StatelessWidget {
     return new Container(
         child: new Padding(
       padding: const EdgeInsets.only(top: 10.0),
-      child: new Column(
-          // crossAxisAlignment: CrossAxisAlignment.center,
+      child: new Column(children: <Widget>[
+        new Column(
           children: <Widget>[
-            new Column(
-              // crossAxisAlignment: CrossAxisAlignment.center,
+            new Row(
               children: <Widget>[
-                new Row(
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    new Expanded(
-                        child: new Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          new Text(
-                            title,
-                            style: const TextStyle(
-                                letterSpacing: 1.0,
-                                color: Colors.black,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Quicksand'),
-                          ),
-                          new Text(
-                            cityState,
-                            style: const TextStyle(
-                              color: Colors.black87,
-                              fontSize: 14.0,
-                              fontFamily: 'Quicksand',
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 1.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                  ],
-                ),
-                new Container(
-                  child: new Row(
-                    //crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-
+                new Expanded(
+                    child: new Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      _kwiznyValue(
-                          value: '571',
-                          icon: Icons.favorite_border
-                         // image: 'assets/images/ic_distance.png'
-                          ),
-                      new Padding(
-                        padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                      new Text(
+                        title,
+                        style: const TextStyle(
+                            letterSpacing: 1.0,
+                            color: Colors.black,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Quicksand'),
                       ),
-                      _kwiznyValue(
-                          value: '5 Mins',
-                          icon: Icons.time_to_leave
-                         // image: 'assets/images/ic_distance.png'
-                         ),
-
-                      // new Text(
-                      //   "data",
-                      //   style: TextStyle(
-                      //     color: Colors.black45,
-                      //     fontSize: 14.0,
-                      //     fontWeight: FontWeight.w400
-                      //   ),
-                      // )
+                      new Text(
+                        cityState,
+                        style: const TextStyle(
+                          color: Colors.black87,
+                          fontSize: 14.0,
+                          fontFamily: 'Quicksand',
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
                     ],
                   ),
-                )
+                )),
               ],
-            )
-          ]),
+            ),
+            new Container(
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _kwiznyValue(value: '571', icon: Icons.favorite_border),
+                  new Padding(
+                    padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                  ),
+                  _kwiznyValue(value: '5 Mins', icon: Icons.time_to_leave),
+                ],
+              ),
+            ),
+          ],
+        )
+      ]),
     ));
+  }
+
+  Container _buildSeparator() {
+    return Container(
+      padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+      child: Separator(
+        margin: new EdgeInsets.symmetric(vertical: 24.0),
+        height: 2.0,
+        width: double.infinity,
+        color: Colors.black12,
+      ),
+    );
+  }
+
+  Container _buildDescription(){
+    return Container(
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+      child: new Text(
+        "White radish is eaten raw and coocked, and nutrition is the same. It's just different in effect, raw white radish hangover, anti-cancer effect, coocked to eat stomach and digestin, smooth and wide...",
+        style: TextStyle(
+          color: Colors.black87,
+          fontSize: 18.0,
+          //fontWeight: FontWeight.w400,
+          fontFamily: 'Quicksand'
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMap(){
+    final _directionsTitle = 'Directions'.toUpperCase();
+    return Container(
+      padding: new EdgeInsets.only(left: 20.0, top: 20.0),
+      child: new Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new Text(_directionsTitle,
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: 'Quicksand',
+            fontWeight: FontWeight.w600,
+            fontSize: 20.0
+          ),)
+        ],
+
+      )
+
+    );
   }
 
   Widget _kwiznyValue({String value, IconData icon}) {
     return new Container(
       child: new Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-        new Icon(icon, size: 16.0,),
+        new Icon(
+          icon,
+          size: 16.0,
+        ),
         new Container(width: 8.0),
         new Text(
           value,
@@ -169,73 +199,6 @@ class KwiznDetailpage extends StatelessWidget {
               fontFamily: 'Quicksand'),
         ),
       ]),
-    );
-  }
-
-  Container _getGradient() {
-    final color = const Color(0xFFfc5185);
-    final eColor = const Color(0xFFf99552);
-    return new Container(
-      margin: new EdgeInsets.only(top: 190.0),
-      height: 110.0,
-      decoration: new BoxDecoration(
-        gradient: new LinearGradient(
-          colors: <Color>[color, eColor],
-          stops: [0.0, 0.9],
-          begin: const FractionalOffset(0.0, 0.0),
-          end: const FractionalOffset(0.0, 1.0),
-        ),
-      ),
-    );
-  }
-
-  Widget _getContent() {
-    final _overviewTitle = 'Overview'.toUpperCase();
-    return new Container(
-      child: new ListView(
-        padding: new EdgeInsets.fromLTRB(0.0, 72.0, 0.0, 32.0),
-        children: <Widget>[
-          new KwiznySummary(
-            title,
-            address,
-            cityState,
-            pictureUrl,
-            horizontal: false,
-          ),
-          new Container(
-            padding: new EdgeInsets.symmetric(horizontal: 32.0),
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Text(_overviewTitle,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Quicksand',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 20.0)),
-                new Separator(),
-                new Text(address,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Quicksand',
-                        fontWeight: FontWeight.w400))
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Container _getToolbar(BuildContext context) {
-    return new Container(
-      margin: new EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          new BackButton(color: Colors.black45),
-        ],
-      ),
     );
   }
 }
