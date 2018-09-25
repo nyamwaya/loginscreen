@@ -78,66 +78,92 @@ class KwiznDetailpage extends StatelessWidget {
   Container _buildHeader() {
     return new Container(
         child: new Padding(
-      padding: const EdgeInsets.only(top: 20.0),
+      padding: const EdgeInsets.only(top: 10.0),
       child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          new Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              new Text(
-                title,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600),
-              ),
-              new Text(
-                cityState,
-                style: TextStyle(
-                    color: Colors.black45,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400),
-              ),
-              new Row(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Expanded(
-                    child: new Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            new Column(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                new Row(
+                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    new Expanded(
+                        child: new Padding(
+                      padding: const EdgeInsets.all(15.0),
                       child: new Column(
-                        //crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          _kwiznyValue(
-                              value: '5 Mins',
-                              image: 'assets/images/ic_distance.png'),
+                          new Text(
+                            title,
+                            style: const TextStyle(
+                                letterSpacing: 1.0,
+                                color: Colors.black,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Quicksand'),
+                          ),
+                          new Text(
+                            cityState,
+                            style: const TextStyle(
+                              color: Colors.black87,
+                              fontSize: 14.0,
+                              fontFamily: 'Quicksand',
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 1.0,
+                            ),
+                          ),
                         ],
                       ),
-                    ),
+                    )),
+                  ],
+                ),
+                new Container(
+                  child: new Row(
+                    //crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    children: <Widget>[
+                      _kwiznyValue(
+                          value: '571',
+                          icon: Icons.favorite_border
+                         // image: 'assets/images/ic_distance.png'
+                          ),
+                      new Padding(
+                        padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                      ),
+                      _kwiznyValue(
+                          value: '5 Mins',
+                          icon: Icons.time_to_leave
+                         // image: 'assets/images/ic_distance.png'
+                         ),
+
+                      // new Text(
+                      //   "data",
+                      //   style: TextStyle(
+                      //     color: Colors.black45,
+                      //     fontSize: 14.0,
+                      //     fontWeight: FontWeight.w400
+                      //   ),
+                      // )
+                    ],
                   ),
-                  new Expanded(
-                    child: _kwiznyValue(
-                        value: '20 coments',
-                        image: 'assets/images/ic_gravity.png'),
-                  )
-                ],
-              )
-            ],
-          ),
-        ],
-      ),
+                )
+              ],
+            )
+          ]),
     ));
   }
 
-  Widget _kwiznyValue({String value, String image}) {
+  Widget _kwiznyValue({String value, IconData icon}) {
     return new Container(
       child: new Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-        new Image.asset(image, height: 12.0),
+        new Icon(icon, size: 16.0,),
         new Container(width: 8.0),
         new Text(
           value,
           style: TextStyle(
-              color: Colors.black54,
+              color: Colors.black,
               fontSize: 14.0,
               fontWeight: FontWeight.w400,
               fontFamily: 'Quicksand'),

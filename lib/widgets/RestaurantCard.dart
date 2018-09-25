@@ -110,3 +110,47 @@ class Restaurantcard extends StatelessWidget {
     );
   }
 }
+
+          // new Text(
+          //       title,
+          //       style: TextStyle(
+          //           color: Colors.black,
+          //           fontSize: 18.0,
+          //           fontWeight: FontWeight.w600),
+          //     ),
+          //     new Text(
+          //       cityState,
+          //       style: TextStyle(
+          //           color: Colors.black45,
+          //           fontSize: 14.0,
+          //           fontWeight: FontWeight.w400),
+          //     ),
+          //     new Row(
+          //       //mainAxisAlignment: MainAxisAlignment.center,
+          //       children: <Widget>[
+          //         new Expanded(
+          //           child: new Padding(
+          //             padding: const EdgeInsets.only(top: 20.0),
+          //             child: new Column(
+          //               //crossAxisAlignment: CrossAxisAlignment.center,
+          //               children: <Widget>[
+          //                 _kwiznyValue(
+          //                     value: '5 Mins',
+          //                     image: 'assets/images/ic_distance.png'),
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //         new Expanded(
+          //           child: _kwiznyValue(
+          //               value: '20 coments',
+          //               image: 'assets/images/ic_gravity.png'),
+          //         ),
+          //         new Expanded(
+          //           child: _kwiznyValue(
+          //             value: '5 Mins',
+          //             image: 'assets/images/ic_distance.png'),
+          //           ),
+          //         )
+          //       ],
+          //     )
