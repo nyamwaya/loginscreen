@@ -33,7 +33,7 @@ class _KwiznyListPageState extends State<KwiznyListPage> {
            //Alternative way to do onTap..idk which way is prefered so I will do the other one, If You run into navigation issues with the details page, try this one.
            // onTap: () => widget.onPush(materialIndex),
             onTap: () => Navigator.of(context).push(new PageRouteBuilder(
-               pageBuilder: (_, __, ___) => new KwiznDetailpage(
+               pageBuilder: (_, __, ___) => new KwiznDetailPage(
                 address: '${widget.data[index].address}',
                 cityState: '${widget.data[index].city_state}',
                 //rmaterialIndex: index,
