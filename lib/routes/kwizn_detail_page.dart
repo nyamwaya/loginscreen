@@ -9,8 +9,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
-class KwiznDetailpage extends StatelessWidget {
-  KwiznDetailpage({
+class KwiznDetailPage extends StatefulWidget {
+  KwiznDetailPage({
     this.title,
     this.address,
     this.cityState,
@@ -23,6 +23,12 @@ class KwiznDetailpage extends StatelessWidget {
   final String cityState;
   final String pictureUrl;
   final MaterialColor color;
+ @override
+  State<StatefulWidget> createState() => new _KwiznDetailPageState();
+}
+
+class _KwiznDetailPageState extends State<KwiznDetailPage>{
+
   /* Enable this if you choes to perform on tap the other way final int materialIndex; */
 
   final double latitude = 45.1756032;
@@ -77,7 +83,7 @@ class KwiznDetailpage extends StatelessWidget {
             new ClipRRect(
               borderRadius: new BorderRadius.circular(8.0),
               child: new Image.network(
-                pictureUrl,
+                widget.pictureUrl,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 height: 200.0,
@@ -105,7 +111,7 @@ class KwiznDetailpage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       new Text(
-                        title,
+                        widget.title,
                         style: const TextStyle(
                             letterSpacing: 1.0,
                             color: Colors.black,
@@ -114,7 +120,7 @@ class KwiznDetailpage extends StatelessWidget {
                             fontFamily: 'Quicksand'),
                       ),
                       new Text(
-                        cityState,
+                        widget.cityState,
                         style: const TextStyle(
                           color: Colors.black87,
                           fontSize: 14.0,
@@ -192,14 +198,6 @@ class KwiznDetailpage extends StatelessWidget {
         ));
   }
 
-  Future<String> _returnDistance() async {
-    Dio dio = new Dio();
-    Response response = await dio.get(
-        "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key=AIzaSyBoSkBHcwEaxqeuy9iBSca9B2wUxhtB1vU");
-    print(response.data);
-    return '${response.data}';
-  }
-
   Container _buildMap(double lat, double long) {
     return new Container(
       padding: const EdgeInsets.all(10.0),
@@ -249,6 +247,13 @@ class KwiznDetailpage extends StatelessWidget {
     );
   }
 
+  Future<String> _returnDistance() async {
+    Dio dio = new Dio();
+    Response response = await dio.get(
+        "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key=AIzaSyBoSkBHcwEaxqeuy9iBSca9B2wUxhtB1vU");
+    print(response.data);
+    return '${response.data}';
+  }
 
   Widget _kwiznyValue({String value, IconData icon}) {
     return new Container(
