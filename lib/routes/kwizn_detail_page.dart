@@ -23,12 +23,11 @@ class KwiznDetailPage extends StatefulWidget {
   final String cityState;
   final String pictureUrl;
   final MaterialColor color;
- @override
+  @override
   State<StatefulWidget> createState() => new _KwiznDetailPageState();
 }
 
-class _KwiznDetailPageState extends State<KwiznDetailPage>{
-
+class _KwiznDetailPageState extends State<KwiznDetailPage> {
   /* Enable this if you choes to perform on tap the other way final int materialIndex; */
 
   final double latitude = 45.1756032;
@@ -203,6 +202,7 @@ class _KwiznDetailPageState extends State<KwiznDetailPage>{
       padding: const EdgeInsets.all(10.0),
       height: 218.0,
       child: new Card(
+        color: Colors.red,
         elevation: 10.0,
         child: new Column(
           children: [
@@ -238,6 +238,26 @@ class _KwiznDetailPageState extends State<KwiznDetailPage>{
                               ),
                             ))
                   ])
+                ],
+              ),
+            ),
+            new FlatButton(
+              //padding: const EdgeInsets.all(8.0),
+              textColor: Colors.white,
+              color: Colors.red,
+              onPressed: ()=>{},
+              //  child: new Text("Add"),
+              child: new Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(Icons.time_to_leave),
+                  Text(" 10 min open in Maps", 
+                  style: TextStyle(
+                    fontFamily: 'Quicksand',
+                    fontWeight: FontWeight.w800
+                    //letterSpacing: .05
+                  ))
                 ],
               ),
             ),
