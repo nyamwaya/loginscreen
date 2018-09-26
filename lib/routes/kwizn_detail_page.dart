@@ -23,9 +23,12 @@ class KwiznDetailpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      // ),
       body: Container(
         constraints: new BoxConstraints.expand(),
-        color: new Color(0xFFFFFF),
+        color: Colors.white,
         child: new ListView(
           padding: const EdgeInsets.all(1.0),
           children: <Widget>[
@@ -34,7 +37,7 @@ class KwiznDetailpage extends StatelessWidget {
             _buildHeader(),
             _buildSeparator(),
             _buildDescription(),
-           // _buildSeparator(),
+            _buildSeparator(),
             _buildMap()
           ],
         ),
@@ -164,7 +167,7 @@ class KwiznDetailpage extends StatelessWidget {
   Widget _buildMap(){
     final _directionsTitle = 'Directions'.toUpperCase();
     return Container(
-      padding: new EdgeInsets.only(left: 20.0, top: 20.0),
+      padding: new EdgeInsets.only(left: 20.0),
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
