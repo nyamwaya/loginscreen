@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:firebase_auth_world/style.dart';
 import 'package:firebase_auth_world/widgets/ImageURILoad.dart';
 import 'package:firebase_auth_world/widgets/kwizny_summary.dart';
 import 'package:firebase_auth_world/widgets/separator.dart';
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart';
 
 class KwiznDetailpage extends StatelessWidget {
   KwiznDetailpage({
@@ -19,6 +24,9 @@ class KwiznDetailpage extends StatelessWidget {
   final String pictureUrl;
   final MaterialColor color;
   /* Enable this if you choes to perform on tap the other way final int materialIndex; */
+
+  final double latitude = 45.1756032;
+  final double longitude = -93.66159359999999;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,8 @@ class KwiznDetailpage extends StatelessWidget {
             _buildSeparator(),
             _buildDescription(),
             _buildSeparator(),
-            _buildMap()
+            _buildSectionTitleText(),
+            _buildMap(latitude, longitude)
           ],
         ),
       ),
@@ -149,41 +158,97 @@ class KwiznDetailpage extends StatelessWidget {
     );
   }
 
-  Container _buildDescription(){
+  Container _buildDescription() {
     return Container(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0),
       child: new Text(
         "White radish is eaten raw and coocked, and nutrition is the same. It's just different in effect, raw white radish hangover, anti-cancer effect, coocked to eat stomach and digestin, smooth and wide...",
         style: TextStyle(
-          color: Colors.black87,
-          fontSize: 18.0,
-          //fontWeight: FontWeight.w400,
-          fontFamily: 'Quicksand'
+            color: Colors.black87,
+            fontSize: 18.0,
+            //fontWeight: FontWeight.w400,
+            fontFamily: 'Quicksand'),
+      ),
+    );
+  }
+
+  Widget _buildSectionTitleText() {
+    final _directionsTitle = 'Location';
+    return Container(
+        padding: new EdgeInsets.only(left: 20.0),
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            new Text(
+              _directionsTitle,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Quicksand',
+                  //fontWeight: FontWeight.w600,
+                  letterSpacing: 1.0,
+                  fontSize: 24.0),
+            ),
+          ],
+        ));
+  }
+
+  Future<String> _returnDistance() async {
+    Dio dio = new Dio();
+    Response response = await dio.get(
+        "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key=AIzaSyBoSkBHcwEaxqeuy9iBSca9B2wUxhtB1vU");
+    print(response.data);
+    return '${response.data}';
+  }
+
+  Container _buildMap(double lat, double long) {
+    return new Container(
+      padding: const EdgeInsets.all(10.0),
+      height: 218.0,
+      child: new Card(
+        elevation: 10.0,
+        child: new Column(
+          children: [
+            new Flexible(
+              child: new FlutterMap(
+                options: new MapOptions(
+                    //minZoom: 10.0,
+                    center: new LatLng(lat, longitude),
+                    zoom: 13.0),
+                layers: [
+                  new TileLayerOptions(
+                    urlTemplate: "https://api.tiles.mapbox.com/v4/"
+                        "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
+                    subdomains: ['a', 'b', 'c'],
+                    additionalOptions: {
+                      'accessToken':
+                          'pk.eyJ1IjoiYWxlY2tzb24iLCJhIjoiY2ptam5lcWFnMGhneTN2cWx1b3UybmVrcyJ9.J6357hZKDUPwyx9Ovz9TQg',
+                      'id': 'mapbox.streets',
+                    },
+                  ),
+                  new MarkerLayerOptions(markers: [
+                    new Marker(
+                        width: 45.0,
+                        height: 45.0,
+                        point: new LatLng(lat, long),
+                        builder: (context) => new Container(
+                              child: IconButton(
+                                icon: Icon(Icons.location_on),
+                                color: Colors.red,
+                                onPressed: () {
+                                  print('Marker Tapped');
+                                },
+                              ),
+                            ))
+                  ])
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildMap(){
-    final _directionsTitle = 'Directions'.toUpperCase();
-    return Container(
-      padding: new EdgeInsets.only(left: 20.0),
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          new Text(_directionsTitle,
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: 'Quicksand',
-            fontWeight: FontWeight.w600,
-            fontSize: 20.0
-          ),)
-        ],
-
-      )
-
-    );
-  }
 
   Widget _kwiznyValue({String value, IconData icon}) {
     return new Container(
