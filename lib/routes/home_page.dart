@@ -105,9 +105,9 @@ class _HomePageState extends State<HomePage> {
         //         onPressed: _signOut)
         //   ],
         // ),
-         body: Stack(children: <Widget>[
+        body: Stack(children: <Widget>[
           _buildOffstageNavigator(TabItem.home),
-         // _buildOffstageNavigator(TabItem.favorites),
+          // _buildOffstageNavigator(TabItem.favorites),
           _buildOffstageNavigator(TabItem.profile),
         ]),
         // body: Center(
@@ -132,6 +132,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
   Widget _buildOffstageNavigator(TabItem tabItem) {
     return Offstage(
       offstage: currentTab != tabItem,
@@ -139,6 +140,8 @@ class _HomePageState extends State<HomePage> {
         navigatorKey: navigatorKeys[tabItem],
         tabItem: tabItem,
         data: data,
+        onSignedOut: widget.onSignedOut,
+        auth: widget.auth,
       ),
     );
   }

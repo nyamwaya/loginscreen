@@ -4,7 +4,7 @@ import 'auth_page.dart';
 import 'home_page.dart';
 import 'package:firebase_auth_world/model/database.dart';
 
-
+//Decides weather to show to login page or the home page
 class RootPage extends StatefulWidget {
   RootPage({this.auth, this.databse});
   final BaseAuth auth;
@@ -37,8 +37,8 @@ class _RootPageState extends State<RootPage> {
 
   void _signedOut() {
     setState(() {
-          authStatus = AuthStatus.notSignedIn;
-        });
+      authStatus = AuthStatus.notSignedIn;
+    });
   }
 
   @override
@@ -52,10 +52,9 @@ class _RootPageState extends State<RootPage> {
         );
       case AuthStatus.signedIn:
         return new HomePage(
-          auth: widget.auth,
-          onSignedOut: _signedOut,
-          databse: widget.databse
-        );
+            auth: widget.auth,
+            onSignedOut: _signedOut,
+            databse: widget.databse);
     }
   }
 }

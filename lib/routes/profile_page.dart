@@ -1,11 +1,28 @@
+import 'package:firebase_auth_world/model/auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
+  ProfilePage({this.displaName, this.auth, this.onSignedOut});
+
+  final String displaName;
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+
   @override
   State<StatefulWidget> createState() => _ProfilePage();
 }
 
 class _ProfilePage extends State<ProfilePage> {
+  void _signOut() async {
+    //TODO: implement auto sign user out if userId is not valid
+    try {
+      await widget.auth.signOut();
+      widget.onSignedOut();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +32,7 @@ class _ProfilePage extends State<ProfilePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           //padding: const EdgeInsets.all(1.0),
           children: <Widget>[
-           // _getToolbar(context),
+            // _getToolbar(context),
             _buildHeader(),
             SizedBox(
               height: 30.0,
@@ -42,7 +59,7 @@ class _ProfilePage extends State<ProfilePage> {
 
   Container _buildHeader() {
     return new Container(
-      padding: const EdgeInsets.only(left: 16.0,  bottom: 24.0),
+      padding: const EdgeInsets.only(left: 16.0, bottom: 24.0),
       //height: 218.0,
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -56,7 +73,7 @@ class _ProfilePage extends State<ProfilePage> {
                     new BoxShadow(color: Colors.black38, blurRadius: 32.0)
                   ],
                   image: new DecorationImage(
-                    //TODO: if not profile photo, add random robot 
+                    //TODO: if not profile photo, add random robot
                     image: NetworkImage(
                         'https://images.unsplash.com/photo-1531078215167-91fcfe45b39e?ixlib=rb-0.3.5&s=786d61b2a3ed74d1f981ee230b1a9457&auto=format&fit=crop&w=1098&q=80.jpg'),
                     fit: BoxFit.cover,
@@ -70,7 +87,7 @@ class _ProfilePage extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Text(
-                  "Kasha Killingsworth",
+                  "${widget.displaName}",
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontFamily: 'Quicksand',
@@ -204,7 +221,7 @@ class _ProfilePage extends State<ProfilePage> {
           ListTile(
             trailing: Icon(Icons.feedback),
             onTap: () => {/*TODO: log me out*/},
-            title: Text('Feedback',
+            title: Text('Feedbck',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontFamily: 'Quicksand',
@@ -214,7 +231,7 @@ class _ProfilePage extends State<ProfilePage> {
           ),
           ListTile(
             trailing: Icon(Icons.exit_to_app),
-            onTap: () => {/*TODO: log me out*/},
+            onTap: (_signOut),
             title: Text('Logout',
                 style: TextStyle(
                   fontSize: 24.0,

@@ -1,4 +1,5 @@
 import 'package:firebase_auth_world/model/Kwizn.dart';
+import 'package:firebase_auth_world/model/auth.dart';
 import 'package:firebase_auth_world/routes/favorites.dart';
 import 'package:firebase_auth_world/routes/kwizn_detail_page.dart';
 import 'package:firebase_auth_world/routes/kwiznyListPage.dart';
@@ -12,11 +13,22 @@ class TabNavigatorRoutes {
   static const String detail = '/detail';
 }
 
-class TabNavigator extends StatelessWidget {
-  TabNavigator({this.navigatorKey, this.tabItem, this.data});
+class TabNavigator extends StatefulWidget {
+  TabNavigator({this.navigatorKey, this.tabItem, this.data, this.onSignedOut, this.auth});
   final GlobalKey<NavigatorState> navigatorKey;
   final TabItem tabItem;
   final List<Kwizn> data;
+  final VoidCallback onSignedOut;
+  final BaseAuth auth;
+
+  @override
+  State<StatefulWidget> createState() => _TabNavigatorState();
+
+
+}
+
+class _TabNavigatorState extends State<TabNavigator>{
+
 
   void _push(
     BuildContext context,
@@ -38,10 +50,10 @@ class TabNavigator extends StatelessWidget {
     BuildContext context,
     /* {int materialIndex: 500} enable other routing to work*/
   ) {
-    if (tabItem == TabItem.home) {
+    if (widget.tabItem == TabItem.home) {
       return {
         TabNavigatorRoutes.root: (context) => KwiznyListPage(
-              data: data,
+              data: widget.data,
               onPush: (materialIndex) => _push(
                     context, /* materialIndex: materialIndex enable other routing to work*/
                   ),
@@ -55,12 +67,15 @@ class TabNavigator extends StatelessWidget {
               materialIndex: materialIndex,
             ), enable other routing to work*/
       };
-    } else if (tabItem == TabItem.favorites) {
+    } else if (widget.tabItem == TabItem.favorites) {
       return {
         TabNavigatorRoutes.root: (context) => Favorites(),
       };
-    } else if (tabItem == TabItem.profile) {
-      return {TabNavigatorRoutes.root: (context) => ProfilePage()};
+    } else if (widget.tabItem == TabItem.profile) {
+      return {TabNavigatorRoutes.root: (context) => ProfilePage(
+         auth: widget.auth,
+         onSignedOut: widget.onSignedOut,
+      )};
     }
 
     return {};
@@ -89,7 +104,7 @@ class TabNavigator extends StatelessWidget {
     var routeBuilders = _routeBuilders(context);
 
     return Navigator(
-        key: navigatorKey,
+        key: widget.navigatorKey,
         initialRoute: TabNavigatorRoutes.root,
         onGenerateRoute: (routeSettings) {
           return MaterialPageRoute(
