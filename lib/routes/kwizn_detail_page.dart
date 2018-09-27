@@ -42,16 +42,27 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      // ),
+      appBar: new AppBar(
+        backgroundColor: Colors.red,
+        elevation: 0.0,
+        //centerTitle: true,
+        leading: new BackButton(color: Colors.white),
+        title: new Text(
+          "Details",
+          style: TextStyle(
+              //  fontWeight: FontWeight.w800,
+              color: Colors.white,
+              // fontFamily: 'Quicksand',
+              fontSize: 20.0),
+        ),
+      ),
       body: Container(
         constraints: new BoxConstraints.expand(),
         color: Colors.white,
         child: new ListView(
           padding: const EdgeInsets.all(1.0),
           children: <Widget>[
-            _getToolbar(context),
+            //_getToolbar(context),
             _buildBackgroundImage(),
             _buildHeader(),
             _buildSeparator(),
@@ -103,58 +114,58 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
   Container _buildHeader() {
     return new Container(
       child: new Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: new Column(children: <Widget>[
-        new Column(
-          children: <Widget>[
-            new Row(
-              children: <Widget>[
-                new Expanded(
-                    child: new Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      new Text(
-                        widget.title,
-                        style: const TextStyle(
-                            letterSpacing: 1.0,
-                            color: Colors.black,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Quicksand'),
-                      ),
-                      new Text(
-                        widget.cityState,
-                        style: const TextStyle(
-                          color: Colors.black87,
-                          fontSize: 14.0,
-                          fontFamily: 'Quicksand',
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 1.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
-              ],
-            ),
-            new Container(
-              child: new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        padding: const EdgeInsets.only(top: 10.0),
+        child: new Column(children: <Widget>[
+          new Column(
+            children: <Widget>[
+              new Row(
                 children: <Widget>[
-                  _kwiznyValue(value: '571', icon: Icons.favorite_border),
-                  new Padding(
-                    padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-                  ),
-                  _kwiznyValue(value: '5 Mins', icon: Icons.time_to_leave),
+                  new Expanded(
+                      child: new Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        new Text(
+                          widget.title,
+                          style: const TextStyle(
+                              letterSpacing: 1.0,
+                              color: Colors.black,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Quicksand'),
+                        ),
+                        new Text(
+                          widget.cityState,
+                          style: const TextStyle(
+                            color: Colors.black87,
+                            fontSize: 14.0,
+                            fontFamily: 'Quicksand',
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
                 ],
               ),
-            ),
-          ],
-        )
-      ]),
-    ),
+              new Container(
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _kwiznyValue(value: '571', icon: Icons.favorite_border),
+                    new Padding(
+                      padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                    ),
+                    _kwiznyValue(value: '5 Mins', icon: Icons.time_to_leave),
+                  ],
+                ),
+              ),
+            ],
+          )
+        ]),
+      ),
     );
   }
 

@@ -26,6 +26,14 @@ class _ProfilePage extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: new AppBar(
+        backgroundColor: Colors.red,
+        elevation: 0.0,
+        title: new Text(
+          "Profile",
+          style: TextStyle(color: Colors.white, fontSize: 20.0),
+        ),
+      ),
       body: Container(
         constraints: new BoxConstraints.expand(),
         child: new Column(
@@ -34,9 +42,7 @@ class _ProfilePage extends State<ProfilePage> {
           children: <Widget>[
             // _getToolbar(context),
             _buildHeader(),
-            SizedBox(
-              height: 30.0,
-            ),
+            SizedBox(height: 30.0),
             //_buildStatsBar(),
             _buildOptions()
           ],
@@ -96,7 +102,7 @@ class _ProfilePage extends State<ProfilePage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: new Text(
-                    "Food innovator",
+                    "Food innvator",
                     style: TextStyle(
                         //fontWeight: FontWeight.w600,
                         fontFamily: 'Quicksand',
