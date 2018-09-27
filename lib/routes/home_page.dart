@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys = {
     TabItem.home: GlobalKey<NavigatorState>(),
-    TabItem.favorites: GlobalKey<NavigatorState>(),
+   // TabItem.favorites: GlobalKey<NavigatorState>(),
     TabItem.profile: GlobalKey<NavigatorState>(),
   };
 

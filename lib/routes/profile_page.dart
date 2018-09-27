@@ -33,6 +33,14 @@ class _ProfilePage extends State<ProfilePage> {
           "Profile",
           style: TextStyle(color: Colors.white, fontSize: 20.0),
         ),
+        actions: <Widget>[
+          new FlatButton(
+              child: new Icon(
+                Icons.exit_to_app,
+                color: Colors.white,
+              ),
+              onPressed: _signOut)
+        ],
       ),
       body: Container(
         constraints: new BoxConstraints.expand(),
@@ -235,17 +243,17 @@ class _ProfilePage extends State<ProfilePage> {
                   fontWeight: FontWeight.w500,
                 )),
           ),
-          ListTile(
-            trailing: Icon(Icons.exit_to_app),
-            onTap: (_signOut),
-            title: Text('Logout',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontFamily: 'Quicksand',
-                  color: Colors.redAccent,
-                  fontWeight: FontWeight.w500,
-                )),
-          ),
+          // ListTile(
+          //   trailing: Icon(Icons.exit_to_app),
+          //   onTap: (_signOut),
+          //   title: Text('Logout',
+          //       style: TextStyle(
+          //         fontSize: 24.0,
+          //         fontFamily: 'Quicksand',
+          //         color: Colors.redAccent,
+          //         fontWeight: FontWeight.w500,
+          //       )),
+          // ),
         ],
       ),
     ));

@@ -1,16 +1,16 @@
 
 import 'package:flutter/material.dart';
 
-enum TabItem { home, favorites, profile }
+enum TabItem { home, /*favorites,*/  profile }
 
 class TabHelper {
   static TabItem item({int index}) {
     switch (index) {
       case 0:
         return TabItem.home;
+      // case 1:
+      //   return TabItem.favorites;
       case 1:
-        return TabItem.favorites;
-      case 2:
         return TabItem.profile;
     }
     return TabItem.home;
@@ -20,8 +20,8 @@ class TabHelper {
     switch (tabItem) {
       case TabItem.home:
         return 'Home';
-      case TabItem.favorites:
-        return 'Favorites';
+      // case TabItem.favorites:
+      //   return 'Favorites';
       case TabItem.profile:
         return 'Profile';
     }
@@ -31,8 +31,8 @@ class TabHelper {
      switch (tabItem) {
       case TabItem.home:
         return Icons.home;
-      case TabItem.favorites:
-        return Icons.favorite;
+      // case TabItem.favorites:
+      //   return Icons.favorite;
       case TabItem.profile:
         return Icons.person;
     }
@@ -43,8 +43,8 @@ class TabHelper {
     switch (tabItem) {
       case TabItem.home:
         return Colors.red;
-      case TabItem.favorites:
-        return Colors.red;
+      // case TabItem.favorites:
+      //   return Colors.red;
       case TabItem.profile:
         return Colors.red;
     }
@@ -64,7 +64,7 @@ class BottomNavigation extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       items: [
         _buildItem(tabItem: TabItem.home),
-        _buildItem(tabItem: TabItem.favorites),
+        // _buildItem(tabItem: TabItem.favorites),
         _buildItem(tabItem: TabItem.profile),
       ],
       onTap: (index) => onSelectTab(

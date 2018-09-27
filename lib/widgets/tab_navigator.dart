@@ -67,10 +67,10 @@ class _TabNavigatorState extends State<TabNavigator>{
               materialIndex: materialIndex,
             ), enable other routing to work*/
       };
-    } else if (widget.tabItem == TabItem.favorites) {
-      return {
-        TabNavigatorRoutes.root: (context) => Favorites(),
-      };
+    // } else if (widget.tabItem == TabItem.favorites) {
+    //   return {
+    //     TabNavigatorRoutes.root: (context) => Favorites(),
+    //   };
     } else if (widget.tabItem == TabItem.profile) {
       return {TabNavigatorRoutes.root: (context) => ProfilePage(
          auth: widget.auth,
