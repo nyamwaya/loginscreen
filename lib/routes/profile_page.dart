@@ -10,15 +10,17 @@ class _ProfilePage extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          constraints: new BoxConstraints.expand(),
-          child: new ListView(
-            padding: const EdgeInsets.all(1.0),
-            children: <Widget>[
-              _getToolbar(context),
-              _buildHeader(),
-              _buildStatsBar()
-            ],
-          )),
+        constraints: new BoxConstraints.expand(),
+        child: new ListView(
+          padding: const EdgeInsets.all(1.0),
+          children: <Widget>[
+            _getToolbar(context),
+            _buildHeader(),
+            _buildStatsBar(),
+            _buildOptions()
+          ],
+        ),
+      ),
     );
   }
 
@@ -175,7 +177,6 @@ class _ProfilePage extends State<ProfilePage> {
                             color: Colors.black38,
                             fontWeight: FontWeight.w700,
                             fontFamily: 'Quicksand',
-
                             //fontWeight: FontWeight.w800
                           ),
                         )
@@ -187,5 +188,38 @@ class _ProfilePage extends State<ProfilePage> {
             ],
           ),
         ));
+  }
+
+  Container _buildOptions() {
+    return Container(
+        child: Padding(
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            trailing: Icon(Icons.feedback),
+            onTap: () => {/*TODO: log me out*/},
+            title: Text('Feedback',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontFamily: 'Quicksand',
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                )),
+          ),
+          ListTile(
+            trailing: Icon(Icons.exit_to_app),
+            onTap: () => {/*TODO: log me out*/},
+            title: Text('Logout',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontFamily: 'Quicksand',
+                  color: Colors.redAccent,
+                  fontWeight: FontWeight.w500,
+                )),
+          ),
+        ],
+      ),
+    ));
   }
 }
