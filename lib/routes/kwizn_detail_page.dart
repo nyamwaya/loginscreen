@@ -33,7 +33,6 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
   final double latitude = 45.1756032;
   final double longitude = -93.66159359999999;
 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -103,7 +102,7 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
 
   Container _buildHeader() {
     return new Container(
-        child: new Padding(
+      child: new Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: new Column(children: <Widget>[
         new Column(
@@ -155,7 +154,8 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
           ],
         )
       ]),
-    ));
+    ),
+    );
   }
 
   Container _buildSeparator() {
@@ -271,7 +271,6 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
     );
   }
 
-  
   Widget _kwiznyValue({String value, IconData icon}) {
     return new Container(
       child: new Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
