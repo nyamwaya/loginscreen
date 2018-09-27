@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
         // ),
          body: Stack(children: <Widget>[
           _buildOffstageNavigator(TabItem.home),
-          _buildOffstageNavigator(TabItem.favorites),
+         // _buildOffstageNavigator(TabItem.favorites),
           _buildOffstageNavigator(TabItem.profile),
         ]),
         // body: Center(
