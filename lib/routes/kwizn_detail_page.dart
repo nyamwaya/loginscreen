@@ -33,6 +33,13 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
   final double latitude = 45.1756032;
   final double longitude = -93.66159359999999;
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -242,22 +249,19 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
               ),
             ),
             new FlatButton(
-              //padding: const EdgeInsets.all(8.0),
               textColor: Colors.white,
               color: Colors.red,
-              onPressed: ()=>{},
-              //  child: new Text("Add"),
+              onPressed: () => {
+                    //TODO: Launch default map app
+                  },
               child: new Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Icon(Icons.time_to_leave),
-                  Text(" 10 min open in Maps", 
-                  style: TextStyle(
-                    fontFamily: 'Quicksand',
-                    fontWeight: FontWeight.w800
-                    //letterSpacing: .05
-                  ))
+                  Text("Open in Maps",
+                      style: TextStyle(
+                          fontFamily: 'Quicksand', fontWeight: FontWeight.w800))
                 ],
               ),
             ),
@@ -267,14 +271,7 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
     );
   }
 
-  Future<String> _returnDistance() async {
-    Dio dio = new Dio();
-    Response response = await dio.get(
-        "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key=AIzaSyBoSkBHcwEaxqeuy9iBSca9B2wUxhtB1vU");
-    print(response.data);
-    return '${response.data}';
-  }
-
+  
   Widget _kwiznyValue({String value, IconData icon}) {
     return new Container(
       child: new Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
