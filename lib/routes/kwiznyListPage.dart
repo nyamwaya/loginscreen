@@ -1,6 +1,6 @@
 import 'package:firebase_auth_world/model/Kwizn.dart';
 import 'package:firebase_auth_world/routes/kwizn_detail_page.dart';
-import 'package:firebase_auth_world/widgets/RestaurantCard.dart';
+import 'package:firebase_auth_world/widgets/kwizi_card.dart';
 import 'package:flutter/material.dart';
 
 class KwiznyListPage extends StatefulWidget {

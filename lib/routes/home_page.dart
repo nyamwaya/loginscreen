@@ -7,7 +7,6 @@ import 'package:firebase_auth_world/widgets/bottom_navigation.dart';
 import 'package:firebase_auth_world/widgets/tab_navigator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth_world/widgets/RestaurantCard.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({this.auth, this.onSignedOut, this.databse});
