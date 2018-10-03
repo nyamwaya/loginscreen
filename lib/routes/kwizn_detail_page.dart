@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:firebase_auth_world/style.dart';
 import 'package:firebase_auth_world/widgets/ImageURILoad.dart';
 import 'package:firebase_auth_world/widgets/kwizny_summary.dart';
+import 'package:firebase_auth_world/widgets/map_kwizny.dart';
 import 'package:firebase_auth_world/widgets/separator.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
+import 'package:geocoder/geocoder.dart';
 
 class KwiznDetailPage extends StatefulWidget {
   KwiznDetailPage({
@@ -28,11 +30,6 @@ class KwiznDetailPage extends StatefulWidget {
 }
 
 class _KwiznDetailPageState extends State<KwiznDetailPage> {
-  /* Enable this if you choes to perform on tap the other way final int materialIndex; */
-
-  final double latitude = 45.1756032;
-  final double longitude = -93.66159359999999;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -69,21 +66,9 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
             _buildDescription(),
             _buildSeparator(),
             _buildSectionTitleText(),
-            _buildMap(latitude, longitude)
+            MapKwizny(address: widget.address),
           ],
         ),
-      ),
-    );
-  }
-
-  Container _getToolbar(BuildContext context) {
-    return new Container(
-      margin: new EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          new BackButton(color: Colors.black45),
-        ],
       ),
     );
   }
@@ -213,73 +198,6 @@ class _KwiznDetailPageState extends State<KwiznDetailPage> {
             ),
           ],
         ));
-  }
-
-  Container _buildMap(double lat, double long) {
-    return new Container(
-      padding: const EdgeInsets.all(10.0),
-      height: 218.0,
-      child: new Card(
-        color: Colors.red,
-        elevation: 10.0,
-        child: new Column(
-          children: [
-            new Flexible(
-              child: new FlutterMap(
-                options: new MapOptions(
-                    //minZoom: 10.0,
-                    center: new LatLng(lat, longitude),
-                    zoom: 13.0),
-                layers: [
-                  new TileLayerOptions(
-                    urlTemplate: "https://api.tiles.mapbox.com/v4/"
-                        "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
-                    subdomains: ['a', 'b', 'c'],
-                    additionalOptions: {
-                      'accessToken':
-                          'pk.eyJ1IjoiYWxlY2tzb24iLCJhIjoiY2ptam5lcWFnMGhneTN2cWx1b3UybmVrcyJ9.J6357hZKDUPwyx9Ovz9TQg',
-                      'id': 'mapbox.streets',
-                    },
-                  ),
-                  new MarkerLayerOptions(markers: [
-                    new Marker(
-                        width: 45.0,
-                        height: 45.0,
-                        point: new LatLng(lat, long),
-                        builder: (context) => new Container(
-                              child: IconButton(
-                                icon: Icon(Icons.location_on),
-                                color: Colors.red,
-                                onPressed: () {
-                                  print('Marker Tapped');
-                                },
-                              ),
-                            ))
-                  ])
-                ],
-              ),
-            ),
-            new FlatButton(
-              textColor: Colors.white,
-              color: Colors.red,
-              onPressed: () => {
-                    //TODO: Launch default map app
-                  },
-              child: new Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.time_to_leave),
-                  Text("Open in Maps",
-                      style: TextStyle(
-                          fontFamily: 'Quicksand', fontWeight: FontWeight.w800))
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   Widget _kwiznyValue({String value, IconData icon}) {
