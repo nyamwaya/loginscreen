@@ -17,6 +17,8 @@ class MapKwizny extends StatefulWidget {
 class _MapKwiznyState extends State<MapKwizny> {
   double lat;
   double long;
+  MapController mapController;
+  var first;
 
   @override
   void initState() {
@@ -26,11 +28,11 @@ class _MapKwiznyState extends State<MapKwizny> {
 
   Future _setLatLong() async {
     var addresses = await Geocoder.local.findAddressesFromQuery(widget.address);
-    var first = addresses.first;
 
     setState(() {
-      lat = first.coordinates.latitude;
-      long = first.coordinates.longitude;
+   
+      lat = addresses.first.coordinates.latitude;
+      long = addresses.first.coordinates.longitude;
     });
   }
 
@@ -38,7 +40,6 @@ class _MapKwiznyState extends State<MapKwizny> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-
       child: Container(
         padding: const EdgeInsets.all(10.0),
         height: 218.0,
@@ -50,9 +51,10 @@ class _MapKwiznyState extends State<MapKwizny> {
               new Flexible(
                 //fit: BoxFit.cover,
                 child: new FlutterMap(
+                  mapController: mapController,
                   options: new MapOptions(
                       //minZoom: 10.0,
-                      center: new LatLng(lat, long),
+                      center: LatLng(lat, long),
                       zoom: 13.0),
                   layers: [
                     TileLayerOptions(
