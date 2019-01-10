@@ -63,6 +63,8 @@ class _KwiznyListPageState extends State<KwiznyListPage> {
                         //rmaterialIndex: index,
                         pictureUrl: '${widget.data[index].picture_url}',
                         title: '${widget.data[index].id}',
+                        description: '${widget.data[index].description}',
+                        restaurant: '${widget.data[index].restaurant}',
                       ),
                 )),
             child: new Restaurantcard(

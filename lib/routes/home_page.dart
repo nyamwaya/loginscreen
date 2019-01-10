@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
 
   Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys = {
     TabItem.home: GlobalKey<NavigatorState>(),
-   // TabItem.favorites: GlobalKey<NavigatorState>(),
+    TabItem.photo: GlobalKey<NavigatorState>(),
     TabItem.profile: GlobalKey<NavigatorState>(),
   };
 
@@ -106,8 +106,9 @@ class _HomePageState extends State<HomePage> {
         // ),
         body: Stack(children: <Widget>[
           _buildOffstageNavigator(TabItem.home),
-          // _buildOffstageNavigator(TabItem.favorites),
+          _buildOffstageNavigator(TabItem.photo),
           _buildOffstageNavigator(TabItem.profile),
+         // _buildOffstageNavigator(TabItem.photo),
         ]),
         // body: Center(
         //   child: ListView.builder(

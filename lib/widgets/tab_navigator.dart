@@ -5,6 +5,7 @@ import 'package:firebase_auth_world/routes/kwizn_detail_page.dart';
 import 'package:firebase_auth_world/routes/kwiznyListPage.dart';
 import 'package:firebase_auth_world/routes/profile_page.dart';
 import 'package:firebase_auth_world/widgets/bottom_navigation.dart';
+import 'package:firebase_auth_world/routes/AddPhotoScreen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,12 @@ class TabNavigatorRoutes {
 }
 
 class TabNavigator extends StatefulWidget {
-  TabNavigator({this.navigatorKey, this.tabItem, this.data, this.onSignedOut, this.auth});
+  TabNavigator(
+      {this.navigatorKey,
+      this.tabItem,
+      this.data,
+      this.onSignedOut,
+      this.auth});
   final GlobalKey<NavigatorState> navigatorKey;
   final TabItem tabItem;
   final List<Kwizn> data;
@@ -23,13 +29,9 @@ class TabNavigator extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _TabNavigatorState();
-
-
 }
 
-class _TabNavigatorState extends State<TabNavigator>{
-
-
+class _TabNavigatorState extends State<TabNavigator> {
   void _push(
     BuildContext context,
     /*{int materialIndex: 500}enable other routing to work*/
@@ -67,15 +69,17 @@ class _TabNavigatorState extends State<TabNavigator>{
               materialIndex: materialIndex,
             ), enable other routing to work*/
       };
-    // } else if (widget.tabItem == TabItem.favorites) {
-    //   return {
-    //     TabNavigatorRoutes.root: (context) => Favorites(),
-    //   };
+    } else if (widget.tabItem == TabItem.photo) {
+      return {
+        TabNavigatorRoutes.root: (context) => AddPhotoScreen(),
+      };
     } else if (widget.tabItem == TabItem.profile) {
-      return {TabNavigatorRoutes.root: (context) => ProfilePage(
-         auth: widget.auth,
-         onSignedOut: widget.onSignedOut,
-      )};
+      return {
+        TabNavigatorRoutes.root: (context) => ProfilePage(
+              auth: widget.auth,
+              onSignedOut: widget.onSignedOut,
+            )
+      };
     }
 
     return {};

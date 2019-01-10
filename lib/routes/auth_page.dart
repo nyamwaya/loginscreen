@@ -34,9 +34,9 @@ class _AuthPageState extends State<AuthPage> {
 
   String _email;
   String _password;
-  String _confirmPassword;
-  String _fName;
-  String _lName;
+  String _confirmPassword = "";
+  String _fName = "";
+  String _lName = "";
 
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();

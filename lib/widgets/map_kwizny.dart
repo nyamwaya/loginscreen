@@ -17,8 +17,7 @@ class MapKwizny extends StatefulWidget {
 class _MapKwiznyState extends State<MapKwizny> {
   double lat;
   double long;
-  MapController mapController;
-  var first;
+  bool loading = false;
 
   @override
   void initState() {
@@ -28,17 +27,25 @@ class _MapKwiznyState extends State<MapKwizny> {
 
   Future _setLatLong() async {
     var addresses = await Geocoder.local.findAddressesFromQuery(widget.address);
+    var first = addresses.first;
 
     setState(() {
-   
-      lat = addresses.first.coordinates.latitude;
-      long = addresses.first.coordinates.longitude;
+      lat = first.coordinates.latitude;
+      long = first.coordinates.longitude;
+      loading = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+
+    Widget mapWidget;
+    if (loading) mapWidget = _map();
+
+    else
+      mapWidget = new Text('Loaddng Map...'); //Maybe a load icon
+
+        return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
         padding: const EdgeInsets.all(10.0),
@@ -49,42 +56,8 @@ class _MapKwiznyState extends State<MapKwizny> {
           child: new Column(
             children: [
               new Flexible(
-                //fit: BoxFit.cover,
-                child: new FlutterMap(
-                  mapController: mapController,
-                  options: new MapOptions(
-                      //minZoom: 10.0,
-                      center: LatLng(lat, long),
-                      zoom: 13.0),
-                  layers: [
-                    TileLayerOptions(
-                      urlTemplate: "https://api.tiles.mapbox.com/v4/"
-                          "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
-                      subdomains: ['a', 'b', 'c'],
-                      additionalOptions: {
-                        'accessToken':
-                            'pk.eyJ1IjoiYWxlY2tzb24iLCJhIjoiY2ptam5lcWFnMGhneTN2cWx1b3UybmVrcyJ9.J6357hZKDUPwyx9Ovz9TQg',
-                        'id': 'mapbox.streets',
-                      },
-                    ),
-                    new MarkerLayerOptions(markers: [
-                      new Marker(
-                          width: 45.0,
-                          height: 45.0,
-                          point: new LatLng(lat, long),
-                          builder: (context) => new Container(
-                                child: IconButton(
-                                  icon: Icon(Icons.location_on),
-                                  color: Colors.red,
-                                  onPressed: () {
-                                    print('Marker Tapped');
-                                  },
-                                ),
-                              ))
-                    ])
-                  ],
-                ),
-              ),
+                  //fit: BoxFit.cover,
+                  child: mapWidget),
               new FlatButton(
                 textColor: Colors.white,
                 color: Colors.red,
@@ -107,6 +80,39 @@ class _MapKwiznyState extends State<MapKwizny> {
           ),
         ),
       ),
+    );
+
+
+  }
+
+  _map() {
+    var markers = <Marker>[
+      new Marker(
+          width: 45.0,
+          height: 45.0,
+          point: new LatLng(lat, long),
+          builder: (context) => new Container(
+                child: IconButton(
+                    icon: Icon(Icons.location_on), color: Colors.red),
+              ))
+    ];
+
+    return new FlutterMap(
+      options:
+          new MapOptions(minZoom: 10.0, center: LatLng(lat, long), zoom: 13.0),
+      layers: [
+        TileLayerOptions(
+          urlTemplate: "https://api.tiles.mapbox.com/v4/"
+              "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
+          subdomains: ['a', 'b', 'c'],
+          additionalOptions: {
+            'accessToken':
+                'pk.eyJ1IjoiYWxlY2tzb24iLCJhIjoiY2ptam5lcWFnMGhneTN2cWx1b3UybmVrcyJ9.J6357hZKDUPwyx9Ovz9TQg',
+            'id': 'mapbox.streets',
+          },
+        ),
+        new MarkerLayerOptions(markers: markers)
+      ],
     );
   }
 }

@@ -22,4 +22,12 @@ class Style {
     fontSize: 20.0,
     fontWeight: FontWeight.w400
   );
+
+  static final titleText = baseTextStyle.copyWith(
+    color: Colors.black,
+    fontSize: 16.0,
+    fontWeight: FontWeight.w400,
+   // fontFamily: 'Quicksand'
+    
+  );
 }
